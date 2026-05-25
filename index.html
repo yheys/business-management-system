@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yordi Printing</title>
+  <style>
+    *{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(135deg,#0f172a,#111827);
+  min-height:100vh;
+  color:#f8fafc;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:40px 20px;
+}
+
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  padding:20px 30px;
+  background:rgba(15,23,42,0.75);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:0.5px;
+  color:white;
+  z-index:100;
+  
+}
+
+.container{
+  width:100%;
+  max-width:650px;
+  margin-top:90px;
+}
+
+.card{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:28px;
+  padding:32px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.25),
+    inset 0 1px 1px rgba(255,255,255,0.05);
+}
+
+.card h2{
+  font-size:24px;
+  margin-bottom:24px;
+  font-weight:700;
+  color:#ffffff;
+}
+
+.form-group{
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  margin-bottom:8px;
+  font-size:14px;
+  font-weight:500;
+  color:#cbd5e1;
+}
+
+select,
+input{
+  width:100%;
+  padding:14px 16px;
+  border:none;
+  border-radius:16px;
+  background:rgba(255,255,255,0.07);
+  color:white;
+  font-size:14px;
+  outline:none;
+  transition:0.25s ease;
+  border:1px solid transparent;
+}
+
+select:focus,
+input:focus{
+  border-color:#3b82f6;
+  background:rgba(255,255,255,0.12);
+  box-shadow:0 0 0 4px rgba(59,130,246,0.15);
+}
+
+select option{
+  color:black;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.type-toggle{
+  display:flex;
+  gap:12px;
+  margin-bottom:24px;
+}
+
+.type-btn{
+  flex:1;
+  padding:14px;
+  border-radius:16px;
+  border:none;
+  background:rgba(255,255,255,0.06);
+  color:#cbd5e1;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.25s ease;
+}
+
+.type-btn:hover{
+  background:rgba(255,255,255,0.12);
+  transform:translateY(-1px);
+}
+
+.type-btn.active{
+  background:linear-gradient(135deg,#3b82f6,#2563eb);
+  color:white;
+  box-shadow:0 8px 18px rgba(37,99,235,0.35);
+}
+
+.add-item-row{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+.add-item-row input{
+  flex:1;
+}
+
+.add-btn{
+  padding:12px 18px;
+  border:none;
+  border-radius:14px;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.25s ease;
+}
+
+.add-btn:hover{
+  background:rgba(255,255,255,0.15);
+}
+
+button[type="submit"]{
+  width:100%;
+  padding:16px;
+  margin-top:10px;
+  border:none;
+  border-radius:18px;
+  background:linear-gradient(135deg,#3b82f6,#2563eb);
+  color:white;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s ease;
+  box-shadow:0 10px 25px rgba(37,99,235,0.35);
+}
+
+button[type="submit"]:hover{
+  transform:translateY(-2px);
+  opacity:0.95;
+}
+
+.success-msg{
+  display:none;
+  margin-top:18px;
+  padding:14px;
+  border-radius:16px;
+  background:rgba(34,197,94,0.15);
+  border:1px solid rgba(34,197,94,0.25);
+  color:#86efac;
+  text-align:center;
+  font-weight:600;
+}
+
+@media(max-width:600px){
+
+  .card{
+    padding:24px;
+  }
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .type-toggle{
+    flex-direction:column;
+  }
+
+}
+  </style>
+</head>
+<body>
+
+<header>🖨️ Yordi Printing — Daily Records</header>
+
+<div class="container">
+  <div class="card">
+    <h2>Record a Transaction</h2>
+
+    <!-- Service or Product toggle -->
+    <div class="type-toggle">
+      <button class="type-btn active" onclick="switchType('service')">🖨️ Service</button>
+      <button class="type-btn" onclick="switchType('product')">📦 Product</button>
+    </div>
+
+    <form id="transactionForm">
+
+      <!-- Service dropdown -->
+      <div class="form-group" id="serviceGroup">
+        <label>Service</label>
+        <select id="serviceSelect">
+          <option value="">-- Select a service --</option>
+          <option value="Print">Print</option>
+          <option value="Copy">Copy</option>
+          <option value="Scan">Scan</option>
+          <option value="Type">Type</option>
+          <option value="Laminate">Laminate</option>
+          <option value="Color Print">Color Print</option>
+        </select>
+        <!-- Add custom service -->
+        <div class="add-item-row">
+          <input type="text" id="newService" placeholder="Add a new service...">
+          <button type="button" class="add-btn" onclick="addService()">+ Add</button>
+        </div>
+      </div>
+
+      <!-- Product dropdown -->
+      <div class="form-group" id="productGroup" style="display:none">
+        <label>Product</label>
+        <select id="productSelect">
+          <option value="">-- Select a product --</option>
+          <option value="A4 Paper">A4 Paper</option>
+          <option value="Pen">Pen</option>
+          <option value="Plaster">Plaster</option>
+          <option value="Envelope">Envelope</option>
+        </select>
+        <!-- Add custom product -->
+        <div class="add-item-row">
+          <input type="text" id="newProduct" placeholder="Add a new product...">
+          <button type="button" class="add-btn" onclick="addProduct()">+ Add</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label>Quantity</label>
+          <input type="number" id="quantity" placeholder="e.g. 10" min="1" required>
+        </div>
+        <div class="form-group">
+          <label>Price charged (ETB)</label>
+          <input type="number" id="price" placeholder="e.g. 50" min="0" step="0.01" required>
+        </div>
+      </div>
+
+      <!-- <div class="form-group">
+        <label>Cost (ETB) <span style="color:#aaa;font-weight:400">— leave 0 if no cost</span></label>
+        <input type="number" id="cost" placeholder="0" min="0" step="0.01" value="0">
+      </div> -->
+
+      <button type="submit">Save Transaction</button>
+      <div class="success-msg" id="successMsg">✅ Transaction saved!</div>
+
+    </form>
+  </div>
+</div>
+
+<script>
+  let currentType = 'service';
+
+  // Switch between service and product
+  function switchType(type) {
+    currentType = type;
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('serviceGroup').style.display = type === 'service' ? 'block' : 'none';
+    document.getElementById('productGroup').style.display = type === 'product' ? 'block' : 'none';
+  }
+
+  // Add a new service to the dropdown
+  function addService() {
+    const input = document.getElementById('newService');
+    const value = input.value.trim();
+    if (!value) return;
+    const select = document.getElementById('serviceSelect');
+    const option = document.createElement('option');
+    option.value = value;
+    option.text = value;
+    select.appendChild(option);
+    select.value = value;
+    input.value = '';
+  }
+
+  // Add a new product to the dropdown
+  function addProduct() {
+    const input = document.getElementById('newProduct');
+    const value = input.value.trim();
+    if (!value) return;
+    const select = document.getElementById('productSelect');
+    const option = document.createElement('option');
+    option.value = value;
+    option.text = value;
+    select.appendChild(option);
+    select.value = value;
+    input.value = '';
+  }
+
+  // Submit the form
+  document.getElementById('transactionForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const description = currentType === 'service'
+      ? document.getElementById('serviceSelect').value
+      : document.getElementById('productSelect').value;
+
+    if (!description) {
+      alert('Please select a service or product');
+      return;
+    }
+
+    const data = {
+      type: currentType,
+      description: description,
+      quantity: parseInt(document.getElementById('quantity').value),
+      price: parseFloat(document.getElementById('price').value),
+      cost: parseFloat(document.getElementById('cost').value) || 0
+    };
+
+    const response = await fetch('http://localhost:3000/transaction', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if (result.message) {
+      document.getElementById('successMsg').style.display = 'block';
+      document.getElementById('transactionForm').reset();
+      setTimeout(() => {
+        document.getElementById('successMsg').style.display = 'none';
+      }, 3000);
+    }
+  });
+</script>
+
+</body>
+</html>

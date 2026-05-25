@@ -8,3 +8,4 @@ This system helps businesses manage:
 - Transactions
 - Daily sales records
 - Inventory-related activities
+- with modern and simple UI
