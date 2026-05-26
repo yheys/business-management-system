@@ -1,12 +1,10 @@
 const Database = require('better-sqlite3');
 
-// This creates the database file automatically
-// if it doesn't exist yet
 const db = new Database('yordi_printing.db');
 
-// Create the transactions table
+// Transactions table
 db.exec(`
-CREATE TABLE IF NOT EXISTS transactions (
+  CREATE TABLE IF NOT EXISTS transactions (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     type        TEXT NOT NULL,
     description TEXT NOT NULL,
@@ -14,9 +12,20 @@ CREATE TABLE IF NOT EXISTS transactions (
     price       REAL NOT NULL,
     cost        REAL NOT NULL DEFAULT 0,
     date        TEXT NOT NULL DEFAULT (date('now'))
-)
+  )
 `);
 
-console.log('Database and table created successfully!');
+// Expenses table
+db.exec(`
+  CREATE TABLE IF NOT EXISTS expenses (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    category    TEXT NOT NULL,
+    description TEXT,
+    amount      REAL NOT NULL,
+    date        TEXT NOT NULL DEFAULT (date('now'))
+  )
+`);
+
+console.log('✅ Database ready — both tables created!');
 
 module.exports = db;

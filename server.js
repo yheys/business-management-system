@@ -5,26 +5,142 @@ const app = express();
 app.use(express.json());
 app.use(express.static('.'));
 
-// Route 1 — Save a new transaction
-app.post('/transaction', (req, res) => {
-const { type, description, quantity, price, cost } = req.body;
+// ── TRANSACTION ROUTES ──
 
-const insert = db.prepare(`
+// Save a new transaction
+app.post('/transaction', (req, res) => {
+  const { type, description, quantity, price, cost } = req.body;
+
+  const insert = db.prepare(`
     INSERT INTO transactions (type, description, quantity, price, cost)
     VALUES (?, ?, ?, ?, ?)
-`);
+  `);
 
-insert.run(type, description, quantity, price, cost);
-res.json({ message: 'Transaction saved successfully' });
+  insert.run(type, description, quantity, price, cost);
+  res.json({ message: 'Transaction saved successfully' });
 });
 
-// Route 2 — Get all transactions
+// Get all transactions
 app.get('/transactions', (req, res) => {
   const rows = db.prepare('SELECT * FROM transactions').all();
-res.json(rows);
+  res.json(rows);
+});
+
+// ── EXPENSE ROUTES ──
+
+// Save a new expense
+app.post('/expense', (req, res) => {
+  const { category, description, amount } = req.body;
+
+  const insert = db.prepare(`
+    INSERT INTO expenses (category, description, amount)
+    VALUES (?, ?, ?)
+  `);
+
+  insert.run(category, description || '', amount);
+  res.json({ message: 'Expense saved successfully' });
+});
+
+// Get all expenses
+app.get('/expenses', (req, res) => {
+  const rows = db.prepare('SELECT * FROM expenses').all();
+  res.json(rows);
+});
+
+// ── DAILY REPORT ROUTE ──
+
+// Get today's summary — income, expenses, profit
+app.get('/report/today', (req, res) => {
+  const transactions = db.prepare(`
+    SELECT * FROM transactions
+    WHERE date = date('now')
+    ORDER BY id DESC
+  `).all();
+
+  const expenses = db.prepare(`
+    SELECT * FROM expenses
+    WHERE date = date('now')
+    ORDER BY id DESC
+  `).all();
+
+  const totalIncome = transactions.reduce((sum, t) => sum + (t.price * t.quantity), 0);
+  const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+  const netProfit = totalIncome - totalExpenses;
+
+  // Most profitable service today
+  const byService = {};
+  transactions.forEach(t => {
+    if (!byService[t.description]) byService[t.description] = 0;
+    byService[t.description] += t.price * t.quantity;
+  });
+
+  const topService = Object.entries(byService)
+    .sort((a, b) => b[1] - a[1])
+    .map(([name, income]) => ({ name, income }));
+
+  res.json({
+    transactions,
+    expenses,
+    totalIncome,
+    totalExpenses,
+    netProfit,
+    topService
+  });
+});
+
+// ── WEEKLY REPORT ROUTE ──
+app.get('/report/week', (req, res) => {
+  const transactions = db.prepare(`
+    SELECT * FROM transactions
+    WHERE date >= date('now', '-6 days')
+    ORDER BY date DESC
+  `).all();
+
+  const expenses = db.prepare(`
+    SELECT * FROM expenses
+    WHERE date >= date('now', '-6 days')
+    ORDER BY date DESC
+  `).all();
+
+  const totalIncome = transactions.reduce((sum, t) => sum + (t.price * t.quantity), 0);
+  const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+
+  res.json({
+    transactions,
+    expenses,
+    totalIncome,
+    totalExpenses,
+    netProfit: totalIncome - totalExpenses
+  });
+});
+
+// ── MONTHLY REPORT ROUTE ──
+app.get('/report/month', (req, res) => {
+  const transactions = db.prepare(`
+    SELECT * FROM transactions
+    WHERE strftime('%Y-%m', date) = strftime('%Y-%m', 'now')
+    ORDER BY date DESC
+  `).all();
+
+  const expenses = db.prepare(`
+    SELECT * FROM expenses
+    WHERE strftime('%Y-%m', date) = strftime('%Y-%m', 'now')
+    ORDER BY date DESC
+  `).all();
+
+  const totalIncome = transactions.reduce((sum, t) => sum + (t.price * t.quantity), 0);
+  const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+
+  res.json({
+    transactions,
+    expenses,
+    totalIncome,
+    totalExpenses,
+    netProfit: totalIncome - totalExpenses
+  });
 });
 
 // Start the server
 app.listen(3000, () => {
-console.log('Server is running on http://localhost:3000');
+  console.log('Server is running on http://localhost:3000');
 });
