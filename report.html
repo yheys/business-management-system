@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yordi Printing — Reports</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #0f172a, #111827);
+      min-height: 100vh;
+      color: #f8fafc;
+      padding: 40px 20px;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      padding: 16px 30px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    a.back-btn {
+      text-decoration: none;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    a.back-btn:hover { background: rgba(255,255,255,0.2); }
+
+    .container {
+      max-width: 750px;
+      margin: 90px auto 0;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      color: #cbd5e1;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .tab-btn:hover { background: rgba(255,255,255,0.12); }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      box-shadow: 0 8px 18px rgba(37,99,235,0.35);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .summary-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .summary-label {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 8px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .summary-value {
+      font-size: 26px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .summary-card.income .summary-value { color: #86efac; }
+    .summary-card.expense .summary-value { color: #fca5a5; }
+    .summary-card.profit .summary-value { color: #93c5fd; }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 24px 0 12px;
+    }
+
+    .record-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .record-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .record-left {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+
+    .record-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .record-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 3px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .meta-tag {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    .meta-dot {
+      color: #475569;
+      margin: 0 2px;
+    }
+
+    .meta-date {
+      color: #64748b;
+      font-size: 11px;
+    }
+
+    .record-amount {
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .record-amount.income { color: #86efac; }
+    .record-amount.expense { color: #fca5a5; }
+
+    .top-service-item {
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 8px;
+    }
+
+    .rank {
+      font-size: 13px;
+      font-weight: 700;
+      color: #f59e0b;
+      min-width: 24px;
+    }
+
+    .service-name {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .service-income {
+      font-size: 14px;
+      font-weight: 700;
+      color: #86efac;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 30px;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    #themeToggle {
+      border: none;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    #themeToggle:hover { background: rgba(255,255,255,0.2); }
+
+    /* LIGHT MODE */
+    body.light-mode {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    body.light-mode header {
+      background: rgba(255,255,255,0.8);
+      color: #0f172a;
+    }
+
+    body.light-mode .summary-card {
+      background: white;
+      border-color: #e2e8f0;
+    }
+
+    body.light-mode .summary-value { color: #0f172a; }
+
+    body.light-mode .record-item,
+    body.light-mode .top-service-item {
+      background: white;
+      border-color: #e2e8f0;
+    }
+
+    body.light-mode .record-name,
+    body.light-mode .service-name { color: #0f172a; }
+
+    body.light-mode .tab-btn {
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    body.light-mode a.back-btn {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    body.light-mode #themeToggle {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    body.light-mode .meta-tag {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    body.light-mode .meta-date { color: #94a3b8; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span>📊 Reports</span>
+      <button id="themeToggle">🌙</button>
+    </div>
+    <a href="/index.html" class="back-btn">⬅ Back to Records</a>
+  </header>
+
+  <div class="container">
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="loadReport('today', event)">📅 Today</button>
+      <button class="tab-btn" onclick="loadReport('week', event)">📆 This Week</button>
+      <button class="tab-btn" onclick="loadReport('month', event)">🗓️ This Month</button>
+    </div>
+
+    <div class="summary-grid">
+      <div class="summary-card income">
+        <div class="summary-label">Total Income</div>
+        <div class="summary-value" id="totalIncome">—</div>
+      </div>
+      <div class="summary-card expense">
+        <div class="summary-label">Total Expenses</div>
+        <div class="summary-value" id="totalExpenses">—</div>
+      </div>
+      <div class="summary-card profit">
+        <div class="summary-label">Net Profit</div>
+        <div class="summary-value" id="netProfit">—</div>
+      </div>
+    </div>
+
+    <div class="section-title">🏆 Top Services by Income</div>
+    <div id="topServices" class="loading">Loading...</div>
+    <div style="display:flex; justify-content:center; margin: 10px 0 24px;">
+      <canvas id="donutChart" width="300" height="300"></canvas>
+    </div>
+
+    <div class="section-title">💰 Transactions</div>
+    <div id="transactionList" class="loading">Loading...</div>
+
+    <div class="section-title">💸 Expenses</div>
+    <div id="expenseList" class="loading">Loading...</div>
+
+  </div>
+
+  <script>
+    // ── Ethiopian Calendar ──
+    function toEthiopian(dateStr) {
+  // Parse date parts directly — no timezone conversion
+  const parts = dateStr.split('-');
+  const y = parseInt(parts[0]);
+  const m = parseInt(parts[1]);
+  const d = parseInt(parts[2]);
+  const jdn = gregorianToJDN(y, m, d);
+  const [ey, em, ed] = jdnToEthiopian(jdn);
+  const months = [
+    'Meskerem','Tikimt','Hidar','Tahsas',
+    'Tir','Yekatit','Megabit','Miazia',
+    'Ginbot','Sene','Hamle','Nehase','Pagume'
+  ];
+  return `${ed} ${months[em - 1]} ${ey}`;
+}
+
+    function gregorianToJDN(y, m, d) {
+      return Math.floor((1461 * (y + 4800 + Math.floor((m - 14) / 12))) / 4)
+        + Math.floor((367 * (m - 2 - 12 * Math.floor((m - 14) / 12))) / 12)
+        - Math.floor((3 * Math.floor((y + 4900 + Math.floor((m - 14) / 12)) / 100)) / 4)
+        + d - 32075;
+    }
+
+    function jdnToEthiopian(jdn) {
+      const r = (jdn - 1723856) % 1461;
+      const n = r % 365 + 365 * Math.floor(r / 1460);
+      const year = 4 * Math.floor((jdn - 1723856) / 1461)
+        + Math.floor(r / 365) - Math.floor(r / 1460);
+      const month = Math.floor(n / 30) + 1;
+      const day = n % 30 + 1;
+      return [year, month, day];
+    }
+
+    // ── Donut Chart ──
+    const COLORS = [
+      '#3b82f6','#10b981','#f59e0b',
+      '#ef4444','#8b5cf6','#06b6d4',
+      '#ec4899','#84cc16'
+    ];
+
+    function drawDonut(services) {
+      const canvas = document.getElementById('donutChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const H = canvas.height;
+      ctx.clearRect(0, 0, W, H);
+
+      const total = services.reduce((s, x) => s + x.income, 0);
+      const cx = W / 2;
+      const cy = H / 2;
+      const radius = Math.min(W, H) / 2 - 20;
+      const hole = radius * 0.55;
+      let startAngle = -Math.PI / 2;
+
+      services.forEach((s, i) => {
+        const slice = (s.income / total) * 2 * Math.PI;
+        const endAngle = startAngle + slice;
+        const color = COLORS[i % COLORS.length];
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+
+        if (slice > 0.2) {
+          const midAngle = startAngle + slice / 2;
+          const lx = cx + (radius * 0.75) * Math.cos(midAngle);
+          const ly = cy + (radius * 0.75) * Math.sin(midAngle);
+          const pct = Math.round((s.income / total) * 100);
+          ctx.fillStyle = 'white';
+          ctx.font = 'bold 13px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(`${pct}%`, lx, ly);
+        }
+
+        startAngle = endAngle;
+      });
+
+      // Hole
+      ctx.beginPath();
+      ctx.arc(cx, cy, hole, 0, 2 * Math.PI);
+      const isDark = !document.body.classList.contains('light-mode');
+      ctx.fillStyle = isDark ? '#0f172a' : '#f1f5f9';
+      ctx.fill();
+
+      // Center text
+      ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
+      ctx.font = 'bold 15px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('Income', cx, cy - 10);
+      ctx.font = '13px Inter, sans-serif';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText(`${total.toFixed(0)} ETB`, cx, cy + 12);
+    }
+
+    function clearDonut() {
+      const canvas = document.getElementById('donutChart');
+      if (!canvas) return;
+      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // ── Load Report ──
+    async function loadReport(period, e) {
+      if (e) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+      }
+
+      document.getElementById('totalIncome').textContent = '...';
+      document.getElementById('totalExpenses').textContent = '...';
+      document.getElementById('netProfit').textContent = '...';
+      document.getElementById('topServices').innerHTML = '<div class="loading">Loading...</div>';
+      document.getElementById('transactionList').innerHTML = '<div class="loading">Loading...</div>';
+      document.getElementById('expenseList').innerHTML = '<div class="loading">Loading...</div>';
+      clearDonut();
+
+      try {
+        const res = await fetch(`http://localhost:3000/report/${period}`);
+        const data = await res.json();
+
+        // Summary
+        document.getElementById('totalIncome').textContent = `${data.totalIncome.toFixed(2)} ETB`;
+        document.getElementById('totalExpenses').textContent = `${data.totalExpenses.toFixed(2)} ETB`;
+
+        const profit = data.netProfit;
+        const profitEl = document.getElementById('netProfit');
+        profitEl.textContent = `${profit.toFixed(2)} ETB`;
+        profitEl.style.color = profit >= 0 ? '#86efac' : '#fca5a5';
+
+        // Top services + donut
+        const topEl = document.getElementById('topServices');
+        if (data.topService.length === 0) {
+          topEl.innerHTML = '<div class="empty">No services recorded yet</div>';
+          clearDonut();
+        } else {
+          topEl.innerHTML = data.topService.map((s, i) => `
+            <div class="top-service-item">
+              <span class="rank" style="color:${COLORS[i % COLORS.length]}">#${i + 1}</span>
+              <span style="display:inline-block;width:10px;height:10px;border-radius:50%;
+                background:${COLORS[i % COLORS.length]};margin-right:6px;flex-shrink:0"></span>
+              <span class="service-name">${s.name}</span>
+              <span class="service-income">${s.income.toFixed(2)} ETB</span>
+            </div>
+          `).join('');
+          drawDonut(data.topService);
+        }
+
+        // Transactions
+        const txEl = document.getElementById('transactionList');
+        if (data.transactions.length === 0) {
+          txEl.innerHTML = '<div class="empty">No transactions recorded yet</div>';
+        } else {
+          txEl.innerHTML = '<div class="record-list">' + data.transactions.map(t => `
+            <div class="record-item">
+              <div class="record-left">
+                <span class="record-name">${t.description}</span>
+                <span class="record-meta">
+                  <span class="meta-tag">${t.type}</span>
+                  <span class="meta-dot">·</span>
+                  <span>qty ${t.quantity}</span>
+                  <span class="meta-dot">·</span>
+                  <span>${t.price.toFixed(2)} ETB each</span>
+                  <span class="meta-dot">·</span>
+                  <span class="meta-date">📅 ${toEthiopian(t.date)}</span>
+                </span>
+              </div>
+              <span class="record-amount income">+${(t.price * t.quantity).toFixed(2)} ETB</span>
+            </div>
+          `).join('') + '</div>';
+        }
+
+        // Expenses
+        const expEl = document.getElementById('expenseList');
+        if (data.expenses.length === 0) {
+          expEl.innerHTML = '<div class="empty">No expenses recorded yet</div>';
+        } else {
+          expEl.innerHTML = '<div class="record-list">' + data.expenses.map(e => `
+            <div class="record-item">
+              <div class="record-left">
+                <span class="record-name">${e.category}</span>
+                <span class="record-meta">
+                  ${e.description
+                    ? `<span class="meta-tag">${e.description}</span><span class="meta-dot">·</span>`
+                    : ''}
+                  <span class="meta-date">📅 ${toEthiopian(e.date)}</span>
+                </span>
+              </div>
+              <span class="record-amount expense">-${e.amount.toFixed(2)} ETB</span>
+            </div>
+          `).join('') + '</div>';
+        }
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('transactionList').innerHTML =
+          '<div class="empty">⚠️ Could not load data. Is the server running?</div>';
+      }
+    }
+
+    // Theme toggle
+    document.getElementById('themeToggle').addEventListener('click', function () {
+      document.body.classList.toggle('light-mode');
+      this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+      // Redraw donut with correct background color
+      loadReport(
+        document.querySelector('.tab-btn.active').textContent.includes('Today') ? 'today'
+        : document.querySelector('.tab-btn.active').textContent.includes('Week') ? 'week'
+        : 'month',
+        null
+      );
+    });
+
+    // Load on open
+    loadReport('today', null);
+  </script>
+
+</body>
+</html>
