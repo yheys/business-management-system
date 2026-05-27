@@ -14,6 +14,8 @@ A fullstack web app built for a real printing and stationery shop to track daily
 -  **Ethiopian calendar** date display
 -  **Dark and light mode** toggle
 -  **SQLite database** — no cloud, no subscription, works offline
+-  **record** — divide the weekly report
+- **authentication** — login with the password 
 
 ---
 
