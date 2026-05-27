@@ -15,6 +15,92 @@
       padding: 40px 20px;
     }
 
+    /* ── Login Overlay ── */
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #0f172a, #111827);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .login-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    .login-card h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    .login-card p {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 28px;
+    }
+
+    .login-card input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid transparent;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.07);
+      color: white;
+      font-size: 15px;
+      outline: none;
+      text-align: center;
+      letter-spacing: 4px;
+      margin-bottom: 14px;
+      transition: 0.25s;
+    }
+
+    .login-card input:focus {
+      border-color: #3b82f6;
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+    }
+
+    .login-card button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(37,99,235,0.35);
+    }
+
+    .login-card button:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .login-error {
+      color: #fca5a5;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* ── Main App ── */
+    .app-content { display: none; }
+
     header {
       position: fixed;
       top: 0; left: 0;
@@ -32,6 +118,12 @@
       justify-content: space-between;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     a.back-btn {
       text-decoration: none;
       background: rgba(255,255,255,0.1);
@@ -44,6 +136,20 @@
     }
 
     a.back-btn:hover { background: rgba(255,255,255,0.2); }
+
+    .logout-btn {
+      border: none;
+      background: rgba(239,68,68,0.15);
+      color: #fca5a5;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .logout-btn:hover { background: rgba(239,68,68,0.25); }
 
     .container {
       max-width: 750px;
@@ -162,7 +268,7 @@
 
     .meta-tag {
       display: inline-block;
-      background: rgba(59, 130, 246, 0.15);
+      background: rgba(59,130,246,0.15);
       color: #93c5fd;
       padding: 2px 8px;
       border-radius: 20px;
@@ -171,15 +277,8 @@
       text-transform: capitalize;
     }
 
-    .meta-dot {
-      color: #475569;
-      margin: 0 2px;
-    }
-
-    .meta-date {
-      color: #64748b;
-      font-size: 11px;
-    }
+    .meta-dot { color: #475569; margin: 0 2px; }
+    .meta-date { color: #64748b; font-size: 11px; }
 
     .record-amount {
       font-size: 15px;
@@ -203,7 +302,6 @@
     .rank {
       font-size: 13px;
       font-weight: 700;
-      color: #f59e0b;
       min-width: 24px;
     }
 
@@ -249,9 +347,23 @@
     #themeToggle:hover { background: rgba(255,255,255,0.2); }
 
     /* LIGHT MODE */
-    body.light-mode {
+    body.light-mode { background: #f1f5f9; color: #0f172a; }
+
+    body.light-mode .login-overlay {
       background: #f1f5f9;
+    }
+
+    body.light-mode .login-card {
+      background: white;
+      border-color: #e2e8f0;
+    }
+
+    body.light-mode .login-card h2 { color: #0f172a; }
+
+    body.light-mode .login-card input {
+      background: #f8fafc;
       color: #0f172a;
+      border-color: #e2e8f0;
     }
 
     body.light-mode header {
@@ -275,109 +387,125 @@
     body.light-mode .record-name,
     body.light-mode .service-name { color: #0f172a; }
 
-    body.light-mode .tab-btn {
-      background: #e2e8f0;
-      color: #334155;
-    }
-
-    body.light-mode a.back-btn {
-      background: #e2e8f0;
-      color: #0f172a;
-    }
-
-    body.light-mode #themeToggle {
-      background: #e2e8f0;
-      color: #0f172a;
-    }
-
-    body.light-mode .meta-tag {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-
+    body.light-mode .tab-btn { background: #e2e8f0; color: #334155; }
+    body.light-mode a.back-btn { background: #e2e8f0; color: #0f172a; }
+    body.light-mode #themeToggle { background: #e2e8f0; color: #0f172a; }
+    body.light-mode .meta-tag { background: #dbeafe; color: #1d4ed8; }
     body.light-mode .meta-date { color: #94a3b8; }
   </style>
 </head>
 
 <body>
-  <header>
-    <div style="display:flex; align-items:center; gap:10px;">
-      <span>📊 Reports</span>
-      <button id="themeToggle">🌙</button>
+
+  <!-- ── Login Overlay ── -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <h2>🖨️ Yordi Printing</h2>
+      <p>Enter your password to view reports</p>
+      <input
+        type="password"
+        id="passwordInput"
+        placeholder="••••••••"
+        onkeydown="if(event.key==='Enter') checkPassword()"
+      >
+      <button onclick="checkPassword()">Unlock Reports</button>
+      <p class="login-error" id="loginError">❌ Wrong password. Try again.</p>
     </div>
-    <a href="/index.html" class="back-btn">⬅ Back to Records</a>
-  </header>
+  </div>
 
-  <div class="container">
+  <!-- ── Main App ── -->
+  <div class="app-content" id="appContent">
 
-    <div class="tabs">
-      <button class="tab-btn active" onclick="loadReport('today', event)">📅 Today</button>
-      <button class="tab-btn" onclick="loadReport('week', event)">📆 This Week</button>
-      <button class="tab-btn" onclick="loadReport('month', event)">🗓️ This Month</button>
-    </div>
-
-    <div class="summary-grid">
-      <div class="summary-card income">
-        <div class="summary-label">Total Income</div>
-        <div class="summary-value" id="totalIncome">—</div>
+    <header>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span>📊 Reports</span>
+        <button id="themeToggle">🌙</button>
       </div>
-      <div class="summary-card expense">
-        <div class="summary-label">Total Expenses</div>
-        <div class="summary-value" id="totalExpenses">—</div>
+      <div class="header-actions">
+        <a href="/index.html" class="back-btn">⬅ Back to Records</a>
+        <button class="logout-btn" onclick="logout()">🔒 Lock</button>
       </div>
-      <div class="summary-card profit">
-        <div class="summary-label">Net Profit</div>
-        <div class="summary-value" id="netProfit">—</div>
+    </header>
+
+    <div class="container">
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="loadReport('today', event)">📅 Today</button>
+        <button class="tab-btn" onclick="loadReport('week', event)">📆 This Week</button>
+        <button class="tab-btn" onclick="loadReport('month', event)">🗓️ This Month</button>
       </div>
+
+      <div class="summary-grid">
+        <div class="summary-card income">
+          <div class="summary-label">Total Income</div>
+          <div class="summary-value" id="totalIncome">—</div>
+        </div>
+        <div class="summary-card expense">
+          <div class="summary-label">Total Expenses</div>
+          <div class="summary-value" id="totalExpenses">—</div>
+        </div>
+        <div class="summary-card profit">
+          <div class="summary-label">Net Profit</div>
+          <div class="summary-value" id="netProfit">—</div>
+        </div>
+      </div>
+
+      <div class="section-title">🏆 Top Services by Income</div>
+      <div id="topServices" class="loading">Loading...</div>
+      <div style="display:flex; justify-content:center; margin: 10px 0 24px;">
+        <canvas id="donutChart" width="300" height="300"></canvas>
+      </div>
+
+      <div class="section-title">💰 Transactions</div>
+      <div id="transactionList" class="loading">Loading...</div>
+
+      <div class="section-title">💸 Expenses</div>
+      <div id="expenseList" class="loading">Loading...</div>
+
     </div>
-
-    <div class="section-title">🏆 Top Services by Income</div>
-    <div id="topServices" class="loading">Loading...</div>
-    <div style="display:flex; justify-content:center; margin: 10px 0 24px;">
-      <canvas id="donutChart" width="300" height="300"></canvas>
-    </div>
-
-    <div class="section-title">💰 Transactions</div>
-    <div id="transactionList" class="loading">Loading...</div>
-
-    <div class="section-title">💸 Expenses</div>
-    <div id="expenseList" class="loading">Loading...</div>
-
   </div>
 
   <script>
-    // ── Ethiopian Calendar ──
-    function toEthiopian(dateStr) {
-  // Parse date parts directly — no timezone conversion
-  const parts = dateStr.split('-');
-  const y = parseInt(parts[0]);
-  const m = parseInt(parts[1]);
-  const d = parseInt(parts[2]);
-  const jdn = gregorianToJDN(y, m, d);
-  const [ey, em, ed] = jdnToEthiopian(jdn);
-  const months = [
-    'Meskerem','Tikimt','Hidar','Tahsas',
-    'Tir','Yekatit','Megabit','Miazia',
-    'Ginbot','Sene','Hamle','Nehase','Pagume'
-  ];
-  return `${ed} ${months[em - 1]} ${ey}`;
-}
+    // ── Password ──
+    // Change this to your friend's password
+    const PASSWORD = 'yordi2024';
 
-    function gregorianToJDN(y, m, d) {
-      return Math.floor((1461 * (y + 4800 + Math.floor((m - 14) / 12))) / 4)
-        + Math.floor((367 * (m - 2 - 12 * Math.floor((m - 14) / 12))) / 12)
-        - Math.floor((3 * Math.floor((y + 4900 + Math.floor((m - 14) / 12)) / 100)) / 4)
-        + d - 32075;
+    function checkPassword() {
+      const input = document.getElementById('passwordInput').value;
+      if (input === PASSWORD) {
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('appContent').style.display = 'block';
+        sessionStorage.setItem('auth', 'true');
+        loadReport('today', null);
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+      }
     }
 
-    function jdnToEthiopian(jdn) {
-      const r = (jdn - 1723856) % 1461;
-      const n = r % 365 + 365 * Math.floor(r / 1460);
-      const year = 4 * Math.floor((jdn - 1723856) / 1461)
-        + Math.floor(r / 365) - Math.floor(r / 1460);
-      const month = Math.floor(n / 30) + 1;
-      const day = n % 30 + 1;
-      return [year, month, day];
+    function logout() {
+      sessionStorage.removeItem('auth');
+      document.getElementById('loginOverlay').style.display = 'flex';
+      document.getElementById('appContent').style.display = 'none';
+      document.getElementById('passwordInput').value = '';
+    }
+
+    // Auto unlock if already logged in this session
+    if (sessionStorage.getItem('auth') === 'true') {
+      document.getElementById('loginOverlay').style.display = 'none';
+      document.getElementById('appContent').style.display = 'block';
+    }
+
+    // ── Date formatter ──
+    function formatDate(dateStr) {
+      const parts = dateStr.split('-');
+      const date = new Date(parts[0], parts[1] - 1, parts[2]);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
     }
 
     // ── Donut Chart ──
@@ -429,14 +557,12 @@
         startAngle = endAngle;
       });
 
-      // Hole
       ctx.beginPath();
       ctx.arc(cx, cy, hole, 0, 2 * Math.PI);
       const isDark = !document.body.classList.contains('light-mode');
       ctx.fillStyle = isDark ? '#0f172a' : '#f1f5f9';
       ctx.fill();
 
-      // Center text
       ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
       ctx.font = 'bold 15px Inter, sans-serif';
       ctx.textAlign = 'center';
@@ -472,7 +598,6 @@
         const res = await fetch(`http://localhost:3000/report/${period}`);
         const data = await res.json();
 
-        // Summary
         document.getElementById('totalIncome').textContent = `${data.totalIncome.toFixed(2)} ETB`;
         document.getElementById('totalExpenses').textContent = `${data.totalExpenses.toFixed(2)} ETB`;
 
@@ -515,7 +640,7 @@
                   <span class="meta-dot">·</span>
                   <span>${t.price.toFixed(2)} ETB each</span>
                   <span class="meta-dot">·</span>
-                  <span class="meta-date">📅 ${toEthiopian(t.date)}</span>
+                  <span class="meta-date">📅 ${formatDate(t.date)}</span>
                 </span>
               </div>
               <span class="record-amount income">+${(t.price * t.quantity).toFixed(2)} ETB</span>
@@ -536,7 +661,7 @@
                   ${e.description
                     ? `<span class="meta-tag">${e.description}</span><span class="meta-dot">·</span>`
                     : ''}
-                  <span class="meta-date">📅 ${toEthiopian(e.date)}</span>
+                  <span class="meta-date">📅 ${formatDate(e.date)}</span>
                 </span>
               </div>
               <span class="record-amount expense">-${e.amount.toFixed(2)} ETB</span>
@@ -555,17 +680,17 @@
     document.getElementById('themeToggle').addEventListener('click', function () {
       document.body.classList.toggle('light-mode');
       this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
-      // Redraw donut with correct background color
       loadReport(
         document.querySelector('.tab-btn.active').textContent.includes('Today') ? 'today'
         : document.querySelector('.tab-btn.active').textContent.includes('Week') ? 'week'
-        : 'month',
-        null
+        : 'month', null
       );
     });
 
-    // Load on open
-    loadReport('today', null);
+    // Load on open only if logged in
+    if (sessionStorage.getItem('auth') === 'true') {
+      loadReport('today', null);
+    }
   </script>
 
 </body>

@@ -23,7 +23,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      padding: 20px 30px;
+      padding: 16px 30px;
       background: rgba(15, 23, 42, 0.75);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -32,6 +32,32 @@
       letter-spacing: 0.5px;
       color: white;
       z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    a.report-btn {
+      text-decoration: none;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    }
+
+    a.report-btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
     }
 
     .container {
@@ -233,7 +259,6 @@
       color: #0f172a;
     }
 
-    /* expense card accent */
     .card.expense-card {
       border-color: rgba(239, 68, 68, 0.2);
     }
@@ -250,10 +275,11 @@
 
 <body>
   <header>
-    <div style="display:flex; align-items:center; gap:10px;">
+    <div class="header-left">
       <span>🖨️ Yordi Printing</span>
       <button id="themeToggle">🌙</button>
     </div>
+    <a href="/report.html" class="report-btn">📊 View Reports</a>
   </header>
 
   <div class="container">
@@ -269,7 +295,6 @@
 
       <form id="transactionForm">
 
-        <!-- Service dropdown -->
         <div class="form-group" id="serviceGroup">
           <label>Service</label>
           <select id="serviceSelect">
@@ -287,7 +312,6 @@
           </div>
         </div>
 
-        <!-- Product dropdown -->
         <div class="form-group" id="productGroup" style="display:none">
           <label>Product</label>
           <select id="productSelect">
@@ -343,7 +367,6 @@
           </div>
         </div>
 
-        <!-- Description — shows when Other is selected -->
         <div class="form-group" id="expenseDescGroup" style="display:none">
           <label>Description <span style="color:#94a3b8;font-weight:400">— what was it for?</span></label>
           <input type="text" id="expenseDesc" placeholder="e.g. coffee for client, gift for staff">
@@ -365,7 +388,6 @@
   <script>
     let currentType = 'service';
 
-    // Switch service / product
     function switchType(type, e) {
       currentType = type;
       document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
@@ -374,7 +396,6 @@
       document.getElementById('productGroup').style.display = type === 'product' ? 'block' : 'none';
     }
 
-    // Add custom service
     function addService() {
       const input = document.getElementById('newService');
       const value = input.value.trim();
@@ -388,7 +409,6 @@
       input.value = '';
     }
 
-    // Add custom product
     function addProduct() {
       const input = document.getElementById('newProduct');
       const value = input.value.trim();
@@ -402,7 +422,6 @@
       input.value = '';
     }
 
-    // Add custom expense category
     function addExpense() {
       const input = document.getElementById('newExpense');
       const value = input.value.trim();
@@ -416,19 +435,16 @@
       input.value = '';
     }
 
-    // Show description when Other is selected
     document.getElementById('expenseSelect').addEventListener('change', function () {
       document.getElementById('expenseDescGroup').style.display =
         this.value === 'Other' ? 'block' : 'none';
     });
 
-    // Theme toggle
     document.getElementById('themeToggle').addEventListener('click', function () {
       document.body.classList.toggle('light-mode');
       this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
     });
 
-    // Submit transaction
     document.getElementById('transactionForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -436,10 +452,7 @@
         ? document.getElementById('serviceSelect').value
         : document.getElementById('productSelect').value;
 
-      if (!description) {
-        alert('Please select a service or product');
-        return;
-      }
+      if (!description) { alert('Please select a service or product'); return; }
 
       const quantity = parseInt(document.getElementById('quantity').value);
       const price = parseFloat(document.getElementById('price').value);
@@ -458,7 +471,6 @@
       document.getElementById('transactionForm').reset();
     });
 
-    // Submit expense
     document.getElementById('expenseForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
