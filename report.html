@@ -86,10 +86,7 @@
       box-shadow: 0 8px 20px rgba(37,99,235,0.35);
     }
 
-    .login-card button:hover {
-      transform: translateY(-2px);
-      opacity: 0.95;
-    }
+    .login-card button:hover { transform: translateY(-2px); opacity: 0.95; }
 
     .login-error {
       color: #fca5a5;
@@ -118,11 +115,7 @@
       justify-content: space-between;
     }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
 
     a.back-btn {
       text-decoration: none;
@@ -151,16 +144,9 @@
 
     .logout-btn:hover { background: rgba(239,68,68,0.25); }
 
-    .container {
-      max-width: 750px;
-      margin: 90px auto 0;
-    }
+    .container { max-width: 750px; margin: 90px auto 0; }
 
-    .tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
+    .tabs { display: flex; gap: 10px; margin-bottom: 24px; }
 
     .tab-btn {
       flex: 1;
@@ -207,12 +193,7 @@
       letter-spacing: 0.05em;
     }
 
-    .summary-value {
-      font-size: 26px;
-      font-weight: 700;
-      color: white;
-    }
-
+    .summary-value { font-size: 26px; font-weight: 700; color: white; }
     .summary-card.income .summary-value { color: #86efac; }
     .summary-card.expense .summary-value { color: #fca5a5; }
     .summary-card.profit .summary-value { color: #93c5fd; }
@@ -226,12 +207,7 @@
       margin: 24px 0 12px;
     }
 
-    .record-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
+    .record-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
 
     .record-item {
       background: rgba(255,255,255,0.06);
@@ -244,18 +220,8 @@
       gap: 12px;
     }
 
-    .record-left {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      flex: 1;
-    }
-
-    .record-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: white;
-    }
+    .record-left { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+    .record-name { font-size: 14px; font-weight: 600; color: white; }
 
     .record-meta {
       display: flex;
@@ -279,13 +245,7 @@
 
     .meta-dot { color: #475569; margin: 0 2px; }
     .meta-date { color: #64748b; font-size: 11px; }
-
-    .record-amount {
-      font-size: 15px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
+    .record-amount { font-size: 15px; font-weight: 700; white-space: nowrap; }
     .record-amount.income { color: #86efac; }
     .record-amount.expense { color: #fca5a5; }
 
@@ -299,45 +259,18 @@
       gap: 8px;
     }
 
-    .rank {
-      font-size: 13px;
-      font-weight: 700;
-      min-width: 24px;
-    }
+    .rank { font-size: 13px; font-weight: 700; min-width: 24px; }
+    .service-name { flex: 1; font-size: 14px; font-weight: 500; color: white; }
+    .service-income { font-size: 14px; font-weight: 700; color: #86efac; }
 
-    .service-name {
-      flex: 1;
-      font-size: 14px;
-      font-weight: 500;
-      color: white;
-    }
-
-    .service-income {
-      font-size: 14px;
-      font-weight: 700;
-      color: #86efac;
-    }
-
-    .empty {
-      text-align: center;
-      padding: 30px;
-      color: #475569;
-      font-size: 14px;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 40px;
-      color: #475569;
-      font-size: 14px;
-    }
+    .empty { text-align: center; padding: 30px; color: #475569; font-size: 14px; }
+    .loading { text-align: center; padding: 40px; color: #475569; font-size: 14px; }
 
     #themeToggle {
       border: none;
       background: rgba(255,255,255,0.1);
       color: white;
-      width: 42px;
-      height: 42px;
+      width: 42px; height: 42px;
       border-radius: 12px;
       cursor: pointer;
       font-size: 18px;
@@ -346,52 +279,130 @@
 
     #themeToggle:hover { background: rgba(255,255,255,0.2); }
 
-    /* LIGHT MODE */
+    /* ── Weekly breakdown ── */
+    .week-chart-wrap {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .week-chart-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+
+    .day-row {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: background 0.2s;
+      gap: 12px;
+    }
+
+    .day-header:hover { background: rgba(255,255,255,0.04); }
+
+    .day-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      min-width: 100px;
+    }
+
+    .day-date { font-size: 12px; color: #64748b; flex: 1; }
+
+    .day-totals { display: flex; gap: 14px; align-items: center; }
+
+    .day-income { font-size: 13px; font-weight: 600; color: #86efac; }
+    .day-expense { font-size: 13px; font-weight: 600; color: #fca5a5; }
+
+    .day-chevron { font-size: 12px; color: #475569; transition: transform 0.2s; }
+    .day-chevron.open { transform: rotate(180deg); }
+
+    .day-detail {
+      display: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 12px 18px;
+    }
+
+    .day-detail.open { display: block; }
+
+    .detail-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .grouped-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      gap: 10px;
+    }
+
+    .grouped-item:last-child { border-bottom: none; }
+    .grouped-name { font-size: 13px; font-weight: 500; color: white; flex: 1; }
+    .grouped-meta { font-size: 11px; color: #64748b; }
+    .grouped-income { font-size: 13px; font-weight: 600; color: #86efac; }
+
+    .expense-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .expense-item:last-child { border-bottom: none; }
+    .expense-name { font-size: 13px; color: #fca5a5; flex: 1; }
+    .expense-amount { font-size: 13px; font-weight: 600; color: #fca5a5; }
+    .day-empty { font-size: 12px; color: #475569; padding: 6px 0; text-align: center; }
+
+    /* ── LIGHT MODE ── */
     body.light-mode { background: #f1f5f9; color: #0f172a; }
-
-    body.light-mode .login-overlay {
-      background: #f1f5f9;
-    }
-
-    body.light-mode .login-card {
-      background: white;
-      border-color: #e2e8f0;
-    }
-
+    body.light-mode .login-overlay { background: #f1f5f9; }
+    body.light-mode .login-card { background: white; border-color: #e2e8f0; }
     body.light-mode .login-card h2 { color: #0f172a; }
-
-    body.light-mode .login-card input {
-      background: #f8fafc;
-      color: #0f172a;
-      border-color: #e2e8f0;
-    }
-
-    body.light-mode header {
-      background: rgba(255,255,255,0.8);
-      color: #0f172a;
-    }
-
-    body.light-mode .summary-card {
-      background: white;
-      border-color: #e2e8f0;
-    }
-
+    body.light-mode .login-card input { background: #f8fafc; color: #0f172a; border-color: #e2e8f0; }
+    body.light-mode header { background: rgba(255,255,255,0.8); color: #0f172a; }
+    body.light-mode .summary-card { background: white; border-color: #e2e8f0; }
     body.light-mode .summary-value { color: #0f172a; }
-
     body.light-mode .record-item,
-    body.light-mode .top-service-item {
-      background: white;
-      border-color: #e2e8f0;
-    }
-
+    body.light-mode .top-service-item { background: white; border-color: #e2e8f0; }
     body.light-mode .record-name,
     body.light-mode .service-name { color: #0f172a; }
-
     body.light-mode .tab-btn { background: #e2e8f0; color: #334155; }
     body.light-mode a.back-btn { background: #e2e8f0; color: #0f172a; }
     body.light-mode #themeToggle { background: #e2e8f0; color: #0f172a; }
     body.light-mode .meta-tag { background: #dbeafe; color: #1d4ed8; }
     body.light-mode .meta-date { color: #94a3b8; }
+    body.light-mode .day-row { background: white; border-color: #e2e8f0; }
+    body.light-mode .day-name { color: #0f172a; }
+    body.light-mode .grouped-name { color: #0f172a; }
+    body.light-mode .week-chart-wrap { background: white; border-color: #e2e8f0; }
+    body.light-mode .day-detail { border-color: #e2e8f0; }
+    body.light-mode .grouped-item { border-color: #f1f5f9; }
+    body.light-mode .expense-item { border-color: #f1f5f9; }
   </style>
 </head>
 
@@ -431,7 +442,7 @@
 
       <div class="tabs">
         <button class="tab-btn active" onclick="loadReport('today', event)">📅 Today</button>
-        <button class="tab-btn" onclick="loadReport('week', event)">📆 This Week</button>
+        <button class="tab-btn" onclick="loadWeek(event)">📆 This Week</button>
         <button class="tab-btn" onclick="loadReport('month', event)">🗓️ This Month</button>
       </div>
 
@@ -450,24 +461,29 @@
         </div>
       </div>
 
+      <!-- Weekly bar chart — only shown in week view -->
+      <div class="week-chart-wrap" id="weekChartWrap" style="display:none">
+        <div class="week-chart-title">📈 Weekly Income vs Expenses</div>
+        <canvas id="weekBarChart" width="680" height="260"></canvas>
+      </div>
+
       <div class="section-title">🏆 Top Services by Income</div>
       <div id="topServices" class="loading">Loading...</div>
       <div style="display:flex; justify-content:center; margin: 10px 0 24px;">
         <canvas id="donutChart" width="300" height="300"></canvas>
       </div>
 
-      <div class="section-title">💰 Transactions</div>
+      <div class="section-title" id="txTitle">💰 Transactions</div>
       <div id="transactionList" class="loading">Loading...</div>
 
-      <div class="section-title">💸 Expenses</div>
-      <div id="expenseList" class="loading">Loading...</div>
+      <div class="section-title" id="expTitle">💸 Expenses</div>
+      <div id="expenseList"></div>
 
     </div>
   </div>
 
   <script>
     // ── Password ──
-    // Change this to your friend's password
     const PASSWORD = 'yordi2024';
 
     function checkPassword() {
@@ -491,7 +507,6 @@
       document.getElementById('passwordInput').value = '';
     }
 
-    // Auto unlock if already logged in this session
     if (sessionStorage.getItem('auth') === 'true') {
       document.getElementById('loginOverlay').style.display = 'none';
       document.getElementById('appContent').style.display = 'block';
@@ -502,9 +517,7 @@
       const parts = dateStr.split('-');
       const date = new Date(parts[0], parts[1] - 1, parts[2]);
       return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
+        year: 'numeric', month: 'short', day: 'numeric'
       });
     }
 
@@ -519,13 +532,11 @@
       const canvas = document.getElementById('donutChart');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const W = canvas.width;
-      const H = canvas.height;
+      const W = canvas.width, H = canvas.height;
       ctx.clearRect(0, 0, W, H);
 
       const total = services.reduce((s, x) => s + x.income, 0);
-      const cx = W / 2;
-      const cy = H / 2;
+      const cx = W / 2, cy = H / 2;
       const radius = Math.min(W, H) / 2 - 20;
       const hole = radius * 0.55;
       let startAngle = -Math.PI / 2;
@@ -553,7 +564,6 @@
           ctx.textBaseline = 'middle';
           ctx.fillText(`${pct}%`, lx, ly);
         }
-
         startAngle = endAngle;
       });
 
@@ -579,19 +589,28 @@
       canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    // ── Load Report ──
+    // ── Load Today / Month Report ──
     async function loadReport(period, e) {
       if (e) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
       }
 
+      // Hide weekly chart
+      document.getElementById('weekChartWrap').style.display = 'none';
+
+      // Show normal section titles
+      document.getElementById('txTitle').textContent = '💰 Transactions';
+      document.getElementById('expTitle').textContent = '💸 Expenses';
+      document.getElementById('txTitle').style.display = 'block';
+      document.getElementById('expTitle').style.display = 'block';
+
       document.getElementById('totalIncome').textContent = '...';
       document.getElementById('totalExpenses').textContent = '...';
       document.getElementById('netProfit').textContent = '...';
       document.getElementById('topServices').innerHTML = '<div class="loading">Loading...</div>';
       document.getElementById('transactionList').innerHTML = '<div class="loading">Loading...</div>';
-      document.getElementById('expenseList').innerHTML = '<div class="loading">Loading...</div>';
+      document.getElementById('expenseList').innerHTML = '';
       clearDonut();
 
       try {
@@ -606,7 +625,6 @@
         profitEl.textContent = `${profit.toFixed(2)} ETB`;
         profitEl.style.color = profit >= 0 ? '#86efac' : '#fca5a5';
 
-        // Top services + donut
         const topEl = document.getElementById('topServices');
         if (data.topService.length === 0) {
           topEl.innerHTML = '<div class="empty">No services recorded yet</div>';
@@ -624,7 +642,6 @@
           drawDonut(data.topService);
         }
 
-        // Transactions
         const txEl = document.getElementById('transactionList');
         if (data.transactions.length === 0) {
           txEl.innerHTML = '<div class="empty">No transactions recorded yet</div>';
@@ -648,7 +665,6 @@
           `).join('') + '</div>';
         }
 
-        // Expenses
         const expEl = document.getElementById('expenseList');
         if (data.expenses.length === 0) {
           expEl.innerHTML = '<div class="empty">No expenses recorded yet</div>';
@@ -676,18 +692,236 @@
       }
     }
 
-    // Theme toggle
+    // ── Weekly View ──
+    const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+    async function loadWeek(e) {
+      if (e) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+      }
+
+      // Show weekly chart, hide normal tx/exp titles
+      document.getElementById('weekChartWrap').style.display = 'block';
+      document.getElementById('txTitle').textContent = '📅 Day by Day Breakdown';
+      document.getElementById('expTitle').style.display = 'none';
+      document.getElementById('expenseList').innerHTML = '';
+
+      document.getElementById('totalIncome').textContent = '...';
+      document.getElementById('totalExpenses').textContent = '...';
+      document.getElementById('netProfit').textContent = '...';
+      document.getElementById('topServices').innerHTML = '<div class="loading">Loading...</div>';
+      document.getElementById('transactionList').innerHTML = '<div class="loading">Loading...</div>';
+      clearDonut();
+
+      try {
+        const res = await fetch('http://localhost:3000/report/week-days');
+        const days = await res.json();
+
+        // Weekly totals
+        const weekIncome = days.reduce((s, d) => s + d.totalIncome, 0);
+        const weekExpenses = days.reduce((s, d) => s + d.totalExpenses, 0);
+        const weekProfit = weekIncome - weekExpenses;
+
+        document.getElementById('totalIncome').textContent = `${weekIncome.toFixed(2)} ETB`;
+        document.getElementById('totalExpenses').textContent = `${weekExpenses.toFixed(2)} ETB`;
+        const profitEl = document.getElementById('netProfit');
+        profitEl.textContent = `${weekProfit.toFixed(2)} ETB`;
+        profitEl.style.color = weekProfit >= 0 ? '#86efac' : '#fca5a5';
+
+        // Top services donut for whole week
+        const allGrouped = {};
+        days.forEach(d => {
+          d.grouped.forEach(g => {
+            if (!allGrouped[g.description]) allGrouped[g.description] = 0;
+            allGrouped[g.description] += g.totalIncome;
+          });
+        });
+        const topService = Object.entries(allGrouped)
+          .sort((a, b) => b[1] - a[1])
+          .map(([name, income]) => ({ name, income }));
+
+        const topEl = document.getElementById('topServices');
+        if (topService.length === 0) {
+          topEl.innerHTML = '<div class="empty">No services this week</div>';
+          clearDonut();
+        } else {
+          topEl.innerHTML = topService.map((s, i) => `
+            <div class="top-service-item">
+              <span class="rank" style="color:${COLORS[i % COLORS.length]}">#${i + 1}</span>
+              <span style="display:inline-block;width:10px;height:10px;border-radius:50%;
+                background:${COLORS[i % COLORS.length]};margin-right:6px;flex-shrink:0"></span>
+              <span class="service-name">${s.name}</span>
+              <span class="service-income">${s.income.toFixed(2)} ETB</span>
+            </div>
+          `).join('');
+          drawDonut(topService);
+        }
+
+        // Day by day breakdown
+        document.getElementById('transactionList').innerHTML = days.map((day, idx) => {
+          const dateObj = new Date(day.date + 'T00:00:00');
+          const dayName = DAYS[dateObj.getDay()];
+          const hasData = day.totalIncome > 0 || day.totalExpenses > 0;
+
+          return `
+            <div class="day-row">
+              <div class="day-header" onclick="toggleDay(${idx})">
+                <span class="day-name">${dayName}</span>
+                <span class="day-date">📅 ${formatDate(day.date)}</span>
+                <div class="day-totals">
+                  <span class="day-income">+${day.totalIncome.toFixed(2)} ETB</span>
+                  <span class="day-expense">-${day.totalExpenses.toFixed(2)} ETB</span>
+                </div>
+                <span class="day-chevron" id="chevron-${idx}">▼</span>
+              </div>
+              <div class="day-detail" id="detail-${idx}">
+                ${!hasData
+                  ? '<p class="day-empty">No records this day</p>'
+                  : ''
+                }
+                ${day.grouped.length > 0 ? `
+                  <p class="detail-section-label">Services & Products</p>
+                  ${day.grouped.map(g => `
+                    <div class="grouped-item">
+                      <span class="grouped-name">${g.description}</span>
+                      <span class="grouped-meta">${g.type} · qty ${g.totalQty}</span>
+                      <span class="grouped-income">+${g.totalIncome.toFixed(2)} ETB</span>
+                    </div>
+                  `).join('')}
+                ` : ''}
+                ${day.expenses.length > 0 ? `
+                  <p class="detail-section-label" style="margin-top:12px">Expenses</p>
+                  ${day.expenses.map(exp => `
+                    <div class="expense-item">
+                      <span class="expense-name">
+                        ${exp.category}
+                        ${exp.description
+                          ? `<span style="color:#64748b"> — ${exp.description}</span>`
+                          : ''}
+                      </span>
+                      <span class="expense-amount">-${exp.amount.toFixed(2)} ETB</span>
+                    </div>
+                  `).join('')}
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Draw bar chart
+        drawWeekBar(days);
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('transactionList').innerHTML =
+          '<div class="empty">⚠️ Could not load data. Is the server running?</div>';
+      }
+    }
+
+    function toggleDay(idx) {
+      document.getElementById(`detail-${idx}`).classList.toggle('open');
+      document.getElementById(`chevron-${idx}`).classList.toggle('open');
+    }
+
+    // ── Weekly Bar Chart ──
+    function drawWeekBar(days) {
+      const canvas = document.getElementById('weekBarChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+      ctx.clearRect(0, 0, W, H);
+
+      const isDark = !document.body.classList.contains('light-mode');
+      const textColor = isDark ? '#94a3b8' : '#475569';
+      const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)';
+
+      const padL = 65, padR = 20, padT = 20, padB = 55;
+      const chartW = W - padL - padR;
+      const chartH = H - padT - padB;
+
+      const maxVal = Math.max(
+        ...days.map(d => Math.max(d.totalIncome, d.totalExpenses)), 1
+      );
+
+      // Grid lines + Y labels
+      const gridLines = 5;
+      for (let i = 0; i <= gridLines; i++) {
+        const y = padT + chartH - (i / gridLines) * chartH;
+        ctx.beginPath();
+        ctx.strokeStyle = gridColor;
+        ctx.lineWidth = 1;
+        ctx.moveTo(padL, y);
+        ctx.lineTo(padL + chartW, y);
+        ctx.stroke();
+        ctx.fillStyle = textColor;
+        ctx.font = '11px Inter, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(Math.round((i / gridLines) * maxVal), padL - 8, y + 4);
+      }
+
+      // Bars
+      const groupW = chartW / days.length;
+      const barW = groupW * 0.28;
+      const gap = groupW * 0.05;
+
+      days.forEach((day, i) => {
+        const x = padL + i * groupW + groupW * 0.12;
+
+        // Income bar
+        const incomeH = (day.totalIncome / maxVal) * chartH;
+        ctx.fillStyle = '#3b82f6';
+        ctx.beginPath();
+        ctx.roundRect(x, padT + chartH - incomeH, barW, incomeH, [4, 4, 0, 0]);
+        ctx.fill();
+
+        // Expense bar
+        const expH = (day.totalExpenses / maxVal) * chartH;
+        ctx.fillStyle = '#ef4444';
+        ctx.beginPath();
+        ctx.roundRect(x + barW + gap, padT + chartH - expH, barW, expH, [4, 4, 0, 0]);
+        ctx.fill();
+
+        // Day name on X axis
+        const dateObj = new Date(day.date + 'T00:00:00');
+        const dayShort = DAYS[dateObj.getDay()].slice(0, 3);
+        ctx.fillStyle = textColor;
+        ctx.font = '11px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(dayShort, x + barW + gap / 2, padT + chartH + 16);
+
+        // Date on X axis
+        const parts = day.date.split('-');
+        ctx.font = '10px Inter, sans-serif';
+        ctx.fillStyle = isDark ? '#475569' : '#94a3b8';
+        ctx.fillText(`${parts[1]}/${parts[2]}`, x + barW + gap / 2, padT + chartH + 30);
+      });
+
+      // Legend
+      ctx.fillStyle = '#3b82f6';
+      ctx.fillRect(padL, H - 16, 10, 10);
+      ctx.fillStyle = textColor;
+      ctx.font = '11px Inter, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('Income', padL + 14, H - 7);
+
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(padL + 72, H - 16, 10, 10);
+      ctx.fillStyle = textColor;
+      ctx.fillText('Expenses', padL + 86, H - 7);
+    }
+
+    // ── Theme toggle ──
     document.getElementById('themeToggle').addEventListener('click', function () {
       document.body.classList.toggle('light-mode');
       this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
-      loadReport(
-        document.querySelector('.tab-btn.active').textContent.includes('Today') ? 'today'
-        : document.querySelector('.tab-btn.active').textContent.includes('Week') ? 'week'
-        : 'month', null
-      );
+      const active = document.querySelector('.tab-btn.active').textContent;
+      if (active.includes('Today')) loadReport('today', null);
+      else if (active.includes('Week')) loadWeek(null);
+      else loadReport('month', null);
     });
 
-    // Load on open only if logged in
+    // Load on open if logged in
     if (sessionStorage.getItem('auth') === 'true') {
       loadReport('today', null);
     }

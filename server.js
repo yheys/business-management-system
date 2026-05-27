@@ -139,6 +139,61 @@ app.get('/report/month', (req, res) => {
     netProfit: totalIncome - totalExpenses
   });
 });
+// ── Weekly breakdown by day ──
+app.get('/report/week-days', (req, res) => {
+  const days = [];
+
+  for (let i = 6; i >= 0; i--) {
+    const transactions = db.prepare(`
+      SELECT * FROM transactions
+      WHERE date = date('now', '-${i} days')
+      ORDER BY id DESC
+    `).all();
+
+    const expenses = db.prepare(`
+      SELECT * FROM expenses
+      WHERE date = date('now', '-${i} days')
+      ORDER BY id DESC
+    `).all();
+
+    const date = db.prepare(
+      `SELECT date('now', '-${i} days') as d`
+    ).get().d;
+
+    // Group transactions by description
+    const grouped = {};
+    transactions.forEach(t => {
+      if (!grouped[t.description]) {
+        grouped[t.description] = { 
+          description: t.description,
+          type: t.type,
+          totalQty: 0,
+          totalIncome: 0
+        };
+      }
+      grouped[t.description].totalQty += t.quantity;
+      grouped[t.description].totalIncome += t.price * t.quantity;
+    });
+
+    const totalIncome = transactions.reduce(
+      (s, t) => s + t.price * t.quantity, 0
+    );
+    const totalExpenses = expenses.reduce(
+      (s, e) => s + e.amount, 0
+    );
+
+    days.push({
+      date,
+      totalIncome,
+      totalExpenses,
+      netProfit: totalIncome - totalExpenses,
+      grouped: Object.values(grouped),
+      expenses
+    });
+  }
+
+  res.json(days);
+});
 
 // Start the server
 app.listen(3000, () => {
