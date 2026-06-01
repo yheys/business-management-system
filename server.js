@@ -10,13 +10,10 @@ app.use(express.static('.'));
 // Save a new transaction
 app.post('/transaction', (req, res) => {
   const { type, description, quantity, price, cost } = req.body;
-
-  const insert = db.prepare(`
+  db.prepare(`
     INSERT INTO transactions (type, description, quantity, price, cost)
     VALUES (?, ?, ?, ?, ?)
-  `);
-
-  insert.run(type, description, quantity, price, cost);
+  `).run(type, description, quantity, price, cost);
   res.json({ message: 'Transaction saved successfully' });
 });
 
@@ -26,18 +23,32 @@ app.get('/transactions', (req, res) => {
   res.json(rows);
 });
 
+// Edit a transaction
+app.put('/transaction/:id', (req, res) => {
+  const { type, description, quantity, price, date } = req.body;
+  db.prepare(`
+    UPDATE transactions
+    SET type = ?, description = ?, quantity = ?, price = ?, date = ?
+    WHERE id = ?
+  `).run(type, description, quantity, price, date, req.params.id);
+  res.json({ message: 'Transaction updated' });
+});
+
+// Delete a transaction
+app.delete('/transaction/:id', (req, res) => {
+  db.prepare('DELETE FROM transactions WHERE id = ?').run(req.params.id);
+  res.json({ message: 'Transaction deleted' });
+});
+
 // ── EXPENSE ROUTES ──
 
 // Save a new expense
 app.post('/expense', (req, res) => {
   const { category, description, amount } = req.body;
-
-  const insert = db.prepare(`
+  db.prepare(`
     INSERT INTO expenses (category, description, amount)
     VALUES (?, ?, ?)
-  `);
-
-  insert.run(category, description || '', amount);
+  `).run(category, description || '', amount);
   res.json({ message: 'Expense saved successfully' });
 });
 
@@ -47,9 +58,24 @@ app.get('/expenses', (req, res) => {
   res.json(rows);
 });
 
-// ── DAILY REPORT ROUTE ──
+// Edit an expense
+app.put('/expense/:id', (req, res) => {
+  const { category, description, amount, date } = req.body;
+  db.prepare(`
+    UPDATE expenses
+    SET category = ?, description = ?, amount = ?, date = ?
+    WHERE id = ?
+  `).run(category, description || '', amount, date, req.params.id);
+  res.json({ message: 'Expense updated' });
+});
 
-// Get today's summary — income, expenses, profit
+// Delete an expense
+app.delete('/expense/:id', (req, res) => {
+  db.prepare('DELETE FROM expenses WHERE id = ?').run(req.params.id);
+  res.json({ message: 'Expense deleted' });
+});
+
+// ── DAILY REPORT ROUTE ──
 app.get('/report/today', (req, res) => {
   const transactions = db.prepare(`
     SELECT * FROM transactions
@@ -65,9 +91,7 @@ app.get('/report/today', (req, res) => {
 
   const totalIncome = transactions.reduce((sum, t) => sum + (t.price * t.quantity), 0);
   const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
-  const netProfit = totalIncome - totalExpenses;
 
-  // Most profitable service today
   const byService = {};
   transactions.forEach(t => {
     if (!byService[t.description]) byService[t.description] = 0;
@@ -78,14 +102,7 @@ app.get('/report/today', (req, res) => {
     .sort((a, b) => b[1] - a[1])
     .map(([name, income]) => ({ name, income }));
 
-  res.json({
-    transactions,
-    expenses,
-    totalIncome,
-    totalExpenses,
-    netProfit,
-    topService
-  });
+  res.json({ transactions, expenses, totalIncome, totalExpenses, netProfit: totalIncome - totalExpenses, topService });
 });
 
 // ── WEEKLY REPORT ROUTE ──
@@ -105,13 +122,7 @@ app.get('/report/week', (req, res) => {
   const totalIncome = transactions.reduce((sum, t) => sum + (t.price * t.quantity), 0);
   const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
 
-  res.json({
-    transactions,
-    expenses,
-    totalIncome,
-    totalExpenses,
-    netProfit: totalIncome - totalExpenses
-  });
+  res.json({ transactions, expenses, totalIncome, totalExpenses, netProfit: totalIncome - totalExpenses });
 });
 
 // ── MONTHLY REPORT ROUTE ──
@@ -131,15 +142,20 @@ app.get('/report/month', (req, res) => {
   const totalIncome = transactions.reduce((sum, t) => sum + (t.price * t.quantity), 0);
   const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
 
-  res.json({
-    transactions,
-    expenses,
-    totalIncome,
-    totalExpenses,
-    netProfit: totalIncome - totalExpenses
+  const byService = {};
+  transactions.forEach(t => {
+    if (!byService[t.description]) byService[t.description] = 0;
+    byService[t.description] += t.price * t.quantity;
   });
+
+  const topService = Object.entries(byService)
+    .sort((a, b) => b[1] - a[1])
+    .map(([name, income]) => ({ name, income }));
+
+  res.json({ transactions, expenses, totalIncome, totalExpenses, netProfit: totalIncome - totalExpenses, topService });
 });
-// ── Weekly breakdown by day ──
+
+// ── WEEKLY BREAKDOWN BY DAY ──
 app.get('/report/week-days', (req, res) => {
   const days = [];
 
@@ -156,15 +172,12 @@ app.get('/report/week-days', (req, res) => {
       ORDER BY id DESC
     `).all();
 
-    const date = db.prepare(
-      `SELECT date('now', '-${i} days') as d`
-    ).get().d;
+    const date = db.prepare(`SELECT date('now', '-${i} days') as d`).get().d;
 
-    // Group transactions by description
     const grouped = {};
     transactions.forEach(t => {
       if (!grouped[t.description]) {
-        grouped[t.description] = { 
+        grouped[t.description] = {
           description: t.description,
           type: t.type,
           totalQty: 0,
@@ -175,12 +188,8 @@ app.get('/report/week-days', (req, res) => {
       grouped[t.description].totalIncome += t.price * t.quantity;
     });
 
-    const totalIncome = transactions.reduce(
-      (s, t) => s + t.price * t.quantity, 0
-    );
-    const totalExpenses = expenses.reduce(
-      (s, e) => s + e.amount, 0
-    );
+    const totalIncome = transactions.reduce((s, t) => s + t.price * t.quantity, 0);
+    const totalExpenses = expenses.reduce((s, e) => s + e.amount, 0);
 
     days.push({
       date,

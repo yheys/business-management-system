@@ -1,6 +1,6 @@
-const Database = require('better-sqlite3');
+const Database = require("better-sqlite3");
 
-const db = new Database('yordi_printing.db');
+const db = new Database("yordi_printing.db");
 
 // Transactions table
 db.exec(`
@@ -26,6 +26,6 @@ db.exec(`
   )
 `);
 
-console.log('✅ Database ready — both tables created!');
+console.log("✅ Database ready — both tables created!");
 
 module.exports = db;

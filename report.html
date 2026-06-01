@@ -38,18 +38,8 @@
       text-align: center;
     }
 
-    .login-card h2 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: white;
-    }
-
-    .login-card p {
-      font-size: 13px;
-      color: #94a3b8;
-      margin-bottom: 28px;
-    }
+    .login-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: white; }
+    .login-card p { font-size: 13px; color: #94a3b8; margin-bottom: 28px; }
 
     .login-card input {
       width: 100%;
@@ -88,12 +78,7 @@
 
     .login-card button:hover { transform: translateY(-2px); opacity: 0.95; }
 
-    .login-error {
-      color: #fca5a5;
-      font-size: 13px;
-      margin-top: 10px;
-      display: none;
-    }
+    .login-error { color: #fca5a5; font-size: 13px; margin-top: 10px; display: none; }
 
     /* ── Main App ── */
     .app-content { display: none; }
@@ -145,7 +130,6 @@
     .logout-btn:hover { background: rgba(239,68,68,0.25); }
 
     .container { max-width: 750px; margin: 90px auto 0; }
-
     .tabs { display: flex; gap: 10px; margin-bottom: 24px; }
 
     .tab-btn {
@@ -184,28 +168,13 @@
       text-align: center;
     }
 
-    .summary-label {
-      font-size: 12px;
-      color: #94a3b8;
-      margin-bottom: 8px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
+    .summary-label { font-size: 12px; color: #94a3b8; margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
     .summary-value { font-size: 26px; font-weight: 700; color: white; }
     .summary-card.income .summary-value { color: #86efac; }
     .summary-card.expense .summary-value { color: #fca5a5; }
     .summary-card.profit .summary-value { color: #93c5fd; }
 
-    .section-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin: 24px 0 12px;
-    }
+    .section-title { font-size: 14px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin: 24px 0 12px; }
 
     .record-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
 
@@ -215,7 +184,7 @@
       border-radius: 14px;
       padding: 14px 18px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
     }
@@ -223,61 +192,140 @@
     .record-left { display: flex; flex-direction: column; gap: 5px; flex: 1; }
     .record-name { font-size: 14px; font-weight: 600; color: white; }
 
-    .record-meta {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 3px;
-      font-size: 12px;
-      color: #94a3b8;
-    }
+    .record-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 3px; font-size: 12px; color: #94a3b8; }
 
-    .meta-tag {
-      display: inline-block;
-      background: rgba(59,130,246,0.15);
-      color: #93c5fd;
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 500;
-      text-transform: capitalize;
-    }
-
+    .meta-tag { display: inline-block; background: rgba(59,130,246,0.15); color: #93c5fd; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 500; text-transform: capitalize; }
     .meta-dot { color: #475569; margin: 0 2px; }
     .meta-date { color: #64748b; font-size: 11px; }
+
+    .record-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
     .record-amount { font-size: 15px; font-weight: 700; white-space: nowrap; }
     .record-amount.income { color: #86efac; }
     .record-amount.expense { color: #fca5a5; }
 
-    .top-service-item {
-      background: rgba(255,255,255,0.06);
-      border-radius: 14px;
-      padding: 12px 18px;
+    /* ── Edit/Delete buttons ── */
+    .record-actions { display: flex; gap: 6px; }
+
+    .btn-edit {
+      border: none;
+      background: rgba(59,130,246,0.15);
+      color: #93c5fd;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-edit:hover { background: rgba(59,130,246,0.3); }
+
+    .btn-delete {
+      border: none;
+      background: rgba(239,68,68,0.15);
+      color: #fca5a5;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-delete:hover { background: rgba(239,68,68,0.3); }
+
+    /* ── Edit Modal ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
-      margin-bottom: 8px;
-      gap: 8px;
+      justify-content: center;
+      z-index: 5000;
+      padding: 20px;
     }
 
-    .rank { font-size: 13px; font-weight: 700; min-width: 24px; }
-    .service-name { flex: 1; font-size: 14px; font-weight: 500; color: white; }
-    .service-income { font-size: 14px; font-weight: 700; color: #86efac; }
+    .modal-card {
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 28px;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
 
-    .empty { text-align: center; padding: 30px; color: #475569; font-size: 14px; }
-    .loading { text-align: center; padding: 40px; color: #475569; font-size: 14px; }
+    .modal-card h3 { font-size: 18px; font-weight: 700; color: white; margin-bottom: 20px; }
 
-    #themeToggle {
-      border: none;
-      background: rgba(255,255,255,0.1);
-      color: white;
-      width: 42px; height: 42px;
+    .modal-field { margin-bottom: 14px; }
+
+    .modal-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .modal-field input,
+    .modal-field select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 12px;
-      cursor: pointer;
-      font-size: 18px;
-      transition: 0.3s;
+      background: rgba(255,255,255,0.07);
+      color: white;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s;
     }
 
-    #themeToggle:hover { background: rgba(255,255,255,0.2); }
+    .modal-field input:focus,
+    .modal-field select:focus {
+      border-color: #3b82f6;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .modal-field select option { color: black; }
+
+    .modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .modal-actions { display: flex; gap: 10px; margin-top: 22px; }
+
+    .btn-save {
+      flex: 1;
+      padding: 13px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 6px 16px rgba(37,99,235,0.3);
+    }
+
+    .btn-save:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-cancel {
+      flex: 1;
+      padding: 13px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      color: #94a3b8;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-cancel:hover { background: rgba(255,255,255,0.14); }
 
     /* ── Weekly breakdown ── */
     .week-chart-wrap {
@@ -288,95 +336,48 @@
       margin-bottom: 24px;
     }
 
-    .week-chart-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 16px;
-    }
+    .week-chart-title { font-size: 13px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
 
-    .day-row {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 14px;
-      margin-bottom: 8px;
-      overflow: hidden;
-    }
+    .day-row { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; margin-bottom: 8px; overflow: hidden; }
 
-    .day-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 18px;
-      cursor: pointer;
-      transition: background 0.2s;
-      gap: 12px;
-    }
-
+    .day-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; cursor: pointer; transition: background 0.2s; gap: 12px; }
     .day-header:hover { background: rgba(255,255,255,0.04); }
 
-    .day-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: white;
-      min-width: 100px;
-    }
-
+    .day-name { font-size: 14px; font-weight: 600; color: white; min-width: 100px; }
     .day-date { font-size: 12px; color: #64748b; flex: 1; }
-
     .day-totals { display: flex; gap: 14px; align-items: center; }
-
     .day-income { font-size: 13px; font-weight: 600; color: #86efac; }
     .day-expense { font-size: 13px; font-weight: 600; color: #fca5a5; }
-
     .day-chevron { font-size: 12px; color: #475569; transition: transform 0.2s; }
     .day-chevron.open { transform: rotate(180deg); }
 
-    .day-detail {
-      display: none;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 12px 18px;
-    }
-
+    .day-detail { display: none; border-top: 1px solid rgba(255,255,255,0.06); padding: 12px 18px; }
     .day-detail.open { display: block; }
 
-    .detail-section-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 8px;
-    }
+    .detail-section-label { font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
 
-    .grouped-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      gap: 10px;
-    }
-
+    .grouped-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); gap: 10px; }
     .grouped-item:last-child { border-bottom: none; }
     .grouped-name { font-size: 13px; font-weight: 500; color: white; flex: 1; }
     .grouped-meta { font-size: 11px; color: #64748b; }
     .grouped-income { font-size: 13px; font-weight: 600; color: #86efac; }
 
-    .expense-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
+    .expense-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); gap: 8px; }
     .expense-item:last-child { border-bottom: none; }
     .expense-name { font-size: 13px; color: #fca5a5; flex: 1; }
-    .expense-amount { font-size: 13px; font-weight: 600; color: #fca5a5; }
+    .expense-amount { font-size: 13px; font-weight: 600; color: #fca5a5; white-space: nowrap; }
     .day-empty { font-size: 12px; color: #475569; padding: 6px 0; text-align: center; }
+
+    .top-service-item { background: rgba(255,255,255,0.06); border-radius: 14px; padding: 12px 18px; display: flex; align-items: center; margin-bottom: 8px; gap: 8px; }
+    .rank { font-size: 13px; font-weight: 700; min-width: 24px; }
+    .service-name { flex: 1; font-size: 14px; font-weight: 500; color: white; }
+    .service-income { font-size: 14px; font-weight: 700; color: #86efac; }
+
+    .empty { text-align: center; padding: 30px; color: #475569; font-size: 14px; }
+    .loading { text-align: center; padding: 40px; color: #475569; font-size: 14px; }
+
+    #themeToggle { border: none; background: rgba(255,255,255,0.1); color: white; width: 42px; height: 42px; border-radius: 12px; cursor: pointer; font-size: 18px; transition: 0.3s; }
+    #themeToggle:hover { background: rgba(255,255,255,0.2); }
 
     /* ── LIGHT MODE ── */
     body.light-mode { background: #f1f5f9; color: #0f172a; }
@@ -387,10 +388,8 @@
     body.light-mode header { background: rgba(255,255,255,0.8); color: #0f172a; }
     body.light-mode .summary-card { background: white; border-color: #e2e8f0; }
     body.light-mode .summary-value { color: #0f172a; }
-    body.light-mode .record-item,
-    body.light-mode .top-service-item { background: white; border-color: #e2e8f0; }
-    body.light-mode .record-name,
-    body.light-mode .service-name { color: #0f172a; }
+    body.light-mode .record-item, body.light-mode .top-service-item { background: white; border-color: #e2e8f0; }
+    body.light-mode .record-name, body.light-mode .service-name { color: #0f172a; }
     body.light-mode .tab-btn { background: #e2e8f0; color: #334155; }
     body.light-mode a.back-btn { background: #e2e8f0; color: #0f172a; }
     body.light-mode #themeToggle { background: #e2e8f0; color: #0f172a; }
@@ -403,6 +402,12 @@
     body.light-mode .day-detail { border-color: #e2e8f0; }
     body.light-mode .grouped-item { border-color: #f1f5f9; }
     body.light-mode .expense-item { border-color: #f1f5f9; }
+    body.light-mode .modal-card { background: white; border-color: #e2e8f0; }
+    body.light-mode .modal-card h3 { color: #0f172a; }
+    body.light-mode .modal-field label { color: #475569; }
+    body.light-mode .modal-field input, body.light-mode .modal-field select { background: #f8fafc; color: #0f172a; border-color: #e2e8f0; }
+    body.light-mode .btn-edit { background: #dbeafe; color: #1d4ed8; }
+    body.light-mode .btn-delete { background: #fee2e2; color: #dc2626; }
   </style>
 </head>
 
@@ -413,14 +418,73 @@
     <div class="login-card">
       <h2>🖨️ Yordi Printing</h2>
       <p>Enter your password to view reports</p>
-      <input
-        type="password"
-        id="passwordInput"
-        placeholder="••••••••"
-        onkeydown="if(event.key==='Enter') checkPassword()"
-      >
+      <input type="password" id="passwordInput" placeholder="••••••••"
+        onkeydown="if(event.key==='Enter') checkPassword()">
       <button onclick="checkPassword()">Unlock Reports</button>
       <p class="login-error" id="loginError">❌ Wrong password. Try again.</p>
+    </div>
+  </div>
+
+  <!-- ── Edit Modal ── -->
+  <div class="modal-overlay" id="editModal" style="display:none" onclick="if(event.target===this) closeModal()">
+    <div class="modal-card">
+      <h3 id="modalTitle">✏️ Edit</h3>
+
+      <!-- Transaction fields -->
+      <div id="txFields">
+        <div class="modal-field">
+          <label>Type</label>
+          <select id="editType">
+            <option value="service">Service</option>
+            <option value="product">Product</option>
+          </select>
+        </div>
+        <div class="modal-field">
+          <label>Description</label>
+          <input type="text" id="editDesc" placeholder="e.g. Color Print">
+        </div>
+        <div class="modal-row">
+          <div class="modal-field">
+            <label>Quantity</label>
+            <input type="number" id="editQty" min="1">
+          </div>
+          <div class="modal-field">
+            <label>Price charged (ETB)</label>
+            <input type="number" id="editPrice" min="0" step="0.01">
+          </div>
+        </div>
+        <div class="modal-field">
+          <label>Date</label>
+          <input type="date" id="editTxDate">
+        </div>
+      </div>
+
+      <!-- Expense fields -->
+      <div id="expFields" style="display:none">
+        <div class="modal-field">
+          <label>Category</label>
+          <input type="text" id="editCategory" placeholder="e.g. Rent">
+        </div>
+        <div class="modal-field">
+          <label>Description <span style="color:#64748b;font-weight:400">— optional</span></label>
+          <input type="text" id="editExpDesc" placeholder="e.g. monthly rent payment">
+        </div>
+        <div class="modal-row">
+          <div class="modal-field">
+            <label>Amount (ETB)</label>
+            <input type="number" id="editAmount" min="0" step="0.01">
+          </div>
+          <div class="modal-field">
+            <label>Date</label>
+            <input type="date" id="editExpDate">
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn-save" onclick="saveEdit()">💾 Save Changes</button>
+      </div>
     </div>
   </div>
 
@@ -461,7 +525,6 @@
         </div>
       </div>
 
-      <!-- Weekly bar chart — only shown in week view -->
       <div class="week-chart-wrap" id="weekChartWrap" style="display:none">
         <div class="week-chart-title">📈 Weekly Income vs Expenses</div>
         <canvas id="weekBarChart" width="680" height="260"></canvas>
@@ -516,17 +579,147 @@
     function formatDate(dateStr) {
       const parts = dateStr.split('-');
       const date = new Date(parts[0], parts[1] - 1, parts[2]);
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric', month: 'short', day: 'numeric'
-      });
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    // ── Reload helper ──
+    function reloadCurrent() {
+      const active = document.querySelector('.tab-btn.active').textContent;
+      if (active.includes('Today')) loadReport('today', null);
+      else if (active.includes('Week')) loadWeek(null);
+      else loadReport('month', null);
+    }
+
+    // ── Edit & Delete ──
+    let editingId = null;
+    let editingType = null;
+
+    function openEditTx(id, type, description, quantity, price, date) {
+      editingId = id;
+      editingType = 'transaction';
+      document.getElementById('modalTitle').textContent = '✏️ Edit Transaction';
+      document.getElementById('txFields').style.display = 'block';
+      document.getElementById('expFields').style.display = 'none';
+      document.getElementById('editType').value = type;
+      document.getElementById('editDesc').value = description;
+      document.getElementById('editQty').value = quantity;
+      document.getElementById('editPrice').value = price;
+      document.getElementById('editTxDate').value = date;
+      document.getElementById('editModal').style.display = 'flex';
+    }
+
+    function openEditExp(id, category, description, amount, date) {
+      editingId = id;
+      editingType = 'expense';
+      document.getElementById('modalTitle').textContent = '✏️ Edit Expense';
+      document.getElementById('txFields').style.display = 'none';
+      document.getElementById('expFields').style.display = 'block';
+      document.getElementById('editCategory').value = category;
+      document.getElementById('editExpDesc').value = description || '';
+      document.getElementById('editAmount').value = amount;
+      document.getElementById('editExpDate').value = date;
+      document.getElementById('editModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('editModal').style.display = 'none';
+      editingId = null;
+      editingType = null;
+    }
+
+    async function saveEdit() {
+      if (!editingId || !editingType) return;
+
+      if (editingType === 'transaction') {
+        const type = document.getElementById('editType').value;
+        const description = document.getElementById('editDesc').value.trim();
+        const quantity = parseInt(document.getElementById('editQty').value);
+        const price = parseFloat(document.getElementById('editPrice').value);
+        const date = document.getElementById('editTxDate').value;
+
+        if (!description || !quantity || !price || !date) { alert('Please fill all fields'); return; }
+
+        await fetch(`http://localhost:3000/transaction/${editingId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type, description, quantity, price, date })
+        });
+
+      } else {
+        const category = document.getElementById('editCategory').value.trim();
+        const description = document.getElementById('editExpDesc').value.trim();
+        const amount = parseFloat(document.getElementById('editAmount').value);
+        const date = document.getElementById('editExpDate').value;
+
+        if (!category || !amount || !date) { alert('Please fill all fields'); return; }
+
+        await fetch(`http://localhost:3000/expense/${editingId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ category, description, amount, date })
+        });
+      }
+
+      closeModal();
+      reloadCurrent();
+    }
+
+    async function deleteRecord(type, id) {
+      const label = type === 'transaction' ? 'transaction' : 'expense';
+      if (!confirm(`Delete this ${label}? This cannot be undone.`)) return;
+      await fetch(`http://localhost:3000/${type}/${id}`, { method: 'DELETE' });
+      reloadCurrent();
+    }
+
+    // ── Transaction record HTML ──
+    function txHTML(t) {
+      return `
+        <div class="record-item">
+          <div class="record-left">
+            <span class="record-name">${t.description}</span>
+            <span class="record-meta">
+              <span class="meta-tag">${t.type}</span>
+              <span class="meta-dot">·</span>
+              <span>qty ${t.quantity}</span>
+              <span class="meta-dot">·</span>
+              <span>${t.price.toFixed(2)} ETB each</span>
+              <span class="meta-dot">·</span>
+              <span class="meta-date">📅 ${formatDate(t.date)}</span>
+            </span>
+          </div>
+          <div class="record-right">
+            <span class="record-amount income">+${(t.price * t.quantity).toFixed(2)} ETB</span>
+            <div class="record-actions">
+              <button class="btn-edit" onclick="openEditTx(${t.id},'${t.type}','${t.description.replace(/'/g,"\\'")}',${t.quantity},${t.price},'${t.date}')">✏️ Edit</button>
+              <button class="btn-delete" onclick="deleteRecord('transaction',${t.id})">🗑️ Delete</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    // ── Expense record HTML ──
+    function expHTML(e) {
+      return `
+        <div class="record-item">
+          <div class="record-left">
+            <span class="record-name">${e.category}</span>
+            <span class="record-meta">
+              ${e.description ? `<span class="meta-tag">${e.description}</span><span class="meta-dot">·</span>` : ''}
+              <span class="meta-date">📅 ${formatDate(e.date)}</span>
+            </span>
+          </div>
+          <div class="record-right">
+            <span class="record-amount expense">-${e.amount.toFixed(2)} ETB</span>
+            <div class="record-actions">
+              <button class="btn-edit" onclick="openEditExp(${e.id},'${e.category.replace(/'/g,"\\'")}','${(e.description||'').replace(/'/g,"\\'")}',${e.amount},'${e.date}')">✏️ Edit</button>
+              <button class="btn-delete" onclick="deleteRecord('expense',${e.id})">🗑️ Delete</button>
+            </div>
+          </div>
+        </div>`;
     }
 
     // ── Donut Chart ──
-    const COLORS = [
-      '#3b82f6','#10b981','#f59e0b',
-      '#ef4444','#8b5cf6','#06b6d4',
-      '#ec4899','#84cc16'
-    ];
+    const COLORS = ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#ec4899','#84cc16'];
 
     function drawDonut(services) {
       const canvas = document.getElementById('donutChart');
@@ -534,7 +727,6 @@
       const ctx = canvas.getContext('2d');
       const W = canvas.width, H = canvas.height;
       ctx.clearRect(0, 0, W, H);
-
       const total = services.reduce((s, x) => s + x.income, 0);
       const cx = W / 2, cy = H / 2;
       const radius = Math.min(W, H) / 2 - 20;
@@ -544,25 +736,21 @@
       services.forEach((s, i) => {
         const slice = (s.income / total) * 2 * Math.PI;
         const endAngle = startAngle + slice;
-        const color = COLORS[i % COLORS.length];
-
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.arc(cx, cy, radius, startAngle, endAngle);
         ctx.closePath();
-        ctx.fillStyle = color;
+        ctx.fillStyle = COLORS[i % COLORS.length];
         ctx.fill();
-
         if (slice > 0.2) {
-          const midAngle = startAngle + slice / 2;
-          const lx = cx + (radius * 0.75) * Math.cos(midAngle);
-          const ly = cy + (radius * 0.75) * Math.sin(midAngle);
-          const pct = Math.round((s.income / total) * 100);
+          const mid = startAngle + slice / 2;
           ctx.fillStyle = 'white';
           ctx.font = 'bold 13px Inter, sans-serif';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText(`${pct}%`, lx, ly);
+          ctx.fillText(`${Math.round((s.income / total) * 100)}%`,
+            cx + (radius * 0.75) * Math.cos(mid),
+            cy + (radius * 0.75) * Math.sin(mid));
         }
         startAngle = endAngle;
       });
@@ -572,7 +760,6 @@
       const isDark = !document.body.classList.contains('light-mode');
       ctx.fillStyle = isDark ? '#0f172a' : '#f1f5f9';
       ctx.fill();
-
       ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
       ctx.font = 'bold 15px Inter, sans-serif';
       ctx.textAlign = 'center';
@@ -589,22 +776,17 @@
       canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    // ── Load Today / Month Report ──
+    // ── Load Today / Month ──
     async function loadReport(period, e) {
       if (e) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
       }
-
-      // Hide weekly chart
       document.getElementById('weekChartWrap').style.display = 'none';
-
-      // Show normal section titles
       document.getElementById('txTitle').textContent = '💰 Transactions';
-      document.getElementById('expTitle').textContent = '💸 Expenses';
       document.getElementById('txTitle').style.display = 'block';
+      document.getElementById('expTitle').textContent = '💸 Expenses';
       document.getElementById('expTitle').style.display = 'block';
-
       document.getElementById('totalIncome').textContent = '...';
       document.getElementById('totalExpenses').textContent = '...';
       document.getElementById('netProfit').textContent = '...';
@@ -619,11 +801,9 @@
 
         document.getElementById('totalIncome').textContent = `${data.totalIncome.toFixed(2)} ETB`;
         document.getElementById('totalExpenses').textContent = `${data.totalExpenses.toFixed(2)} ETB`;
-
-        const profit = data.netProfit;
         const profitEl = document.getElementById('netProfit');
-        profitEl.textContent = `${profit.toFixed(2)} ETB`;
-        profitEl.style.color = profit >= 0 ? '#86efac' : '#fca5a5';
+        profitEl.textContent = `${data.netProfit.toFixed(2)} ETB`;
+        profitEl.style.color = data.netProfit >= 0 ? '#86efac' : '#fca5a5';
 
         const topEl = document.getElementById('topServices');
         if (data.topService.length === 0) {
@@ -633,57 +813,22 @@
           topEl.innerHTML = data.topService.map((s, i) => `
             <div class="top-service-item">
               <span class="rank" style="color:${COLORS[i % COLORS.length]}">#${i + 1}</span>
-              <span style="display:inline-block;width:10px;height:10px;border-radius:50%;
-                background:${COLORS[i % COLORS.length]};margin-right:6px;flex-shrink:0"></span>
+              <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${COLORS[i % COLORS.length]};margin-right:6px;flex-shrink:0"></span>
               <span class="service-name">${s.name}</span>
               <span class="service-income">${s.income.toFixed(2)} ETB</span>
-            </div>
-          `).join('');
+            </div>`).join('');
           drawDonut(data.topService);
         }
 
         const txEl = document.getElementById('transactionList');
-        if (data.transactions.length === 0) {
-          txEl.innerHTML = '<div class="empty">No transactions recorded yet</div>';
-        } else {
-          txEl.innerHTML = '<div class="record-list">' + data.transactions.map(t => `
-            <div class="record-item">
-              <div class="record-left">
-                <span class="record-name">${t.description}</span>
-                <span class="record-meta">
-                  <span class="meta-tag">${t.type}</span>
-                  <span class="meta-dot">·</span>
-                  <span>qty ${t.quantity}</span>
-                  <span class="meta-dot">·</span>
-                  <span>${t.price.toFixed(2)} ETB each</span>
-                  <span class="meta-dot">·</span>
-                  <span class="meta-date">📅 ${formatDate(t.date)}</span>
-                </span>
-              </div>
-              <span class="record-amount income">+${(t.price * t.quantity).toFixed(2)} ETB</span>
-            </div>
-          `).join('') + '</div>';
-        }
+        txEl.innerHTML = data.transactions.length === 0
+          ? '<div class="empty">No transactions recorded yet</div>'
+          : '<div class="record-list">' + data.transactions.map(txHTML).join('') + '</div>';
 
         const expEl = document.getElementById('expenseList');
-        if (data.expenses.length === 0) {
-          expEl.innerHTML = '<div class="empty">No expenses recorded yet</div>';
-        } else {
-          expEl.innerHTML = '<div class="record-list">' + data.expenses.map(e => `
-            <div class="record-item">
-              <div class="record-left">
-                <span class="record-name">${e.category}</span>
-                <span class="record-meta">
-                  ${e.description
-                    ? `<span class="meta-tag">${e.description}</span><span class="meta-dot">·</span>`
-                    : ''}
-                  <span class="meta-date">📅 ${formatDate(e.date)}</span>
-                </span>
-              </div>
-              <span class="record-amount expense">-${e.amount.toFixed(2)} ETB</span>
-            </div>
-          `).join('') + '</div>';
-        }
+        expEl.innerHTML = data.expenses.length === 0
+          ? '<div class="empty">No expenses recorded yet</div>'
+          : '<div class="record-list">' + data.expenses.map(expHTML).join('') + '</div>';
 
       } catch (err) {
         console.error(err);
@@ -700,13 +845,10 @@
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
       }
-
-      // Show weekly chart, hide normal tx/exp titles
       document.getElementById('weekChartWrap').style.display = 'block';
       document.getElementById('txTitle').textContent = '📅 Day by Day Breakdown';
       document.getElementById('expTitle').style.display = 'none';
       document.getElementById('expenseList').innerHTML = '';
-
       document.getElementById('totalIncome').textContent = '...';
       document.getElementById('totalExpenses').textContent = '...';
       document.getElementById('netProfit').textContent = '...';
@@ -718,7 +860,6 @@
         const res = await fetch('http://localhost:3000/report/week-days');
         const days = await res.json();
 
-        // Weekly totals
         const weekIncome = days.reduce((s, d) => s + d.totalIncome, 0);
         const weekExpenses = days.reduce((s, d) => s + d.totalExpenses, 0);
         const weekProfit = weekIncome - weekExpenses;
@@ -729,14 +870,11 @@
         profitEl.textContent = `${weekProfit.toFixed(2)} ETB`;
         profitEl.style.color = weekProfit >= 0 ? '#86efac' : '#fca5a5';
 
-        // Top services donut for whole week
         const allGrouped = {};
-        days.forEach(d => {
-          d.grouped.forEach(g => {
-            if (!allGrouped[g.description]) allGrouped[g.description] = 0;
-            allGrouped[g.description] += g.totalIncome;
-          });
-        });
+        days.forEach(d => d.grouped.forEach(g => {
+          if (!allGrouped[g.description]) allGrouped[g.description] = 0;
+          allGrouped[g.description] += g.totalIncome;
+        }));
         const topService = Object.entries(allGrouped)
           .sort((a, b) => b[1] - a[1])
           .map(([name, income]) => ({ name, income }));
@@ -749,16 +887,13 @@
           topEl.innerHTML = topService.map((s, i) => `
             <div class="top-service-item">
               <span class="rank" style="color:${COLORS[i % COLORS.length]}">#${i + 1}</span>
-              <span style="display:inline-block;width:10px;height:10px;border-radius:50%;
-                background:${COLORS[i % COLORS.length]};margin-right:6px;flex-shrink:0"></span>
+              <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${COLORS[i % COLORS.length]};margin-right:6px;flex-shrink:0"></span>
               <span class="service-name">${s.name}</span>
               <span class="service-income">${s.income.toFixed(2)} ETB</span>
-            </div>
-          `).join('');
+            </div>`).join('');
           drawDonut(topService);
         }
 
-        // Day by day breakdown
         document.getElementById('transactionList').innerHTML = days.map((day, idx) => {
           const dateObj = new Date(day.date + 'T00:00:00');
           const dayName = DAYS[dateObj.getDay()];
@@ -776,10 +911,7 @@
                 <span class="day-chevron" id="chevron-${idx}">▼</span>
               </div>
               <div class="day-detail" id="detail-${idx}">
-                ${!hasData
-                  ? '<p class="day-empty">No records this day</p>'
-                  : ''
-                }
+                ${!hasData ? '<p class="day-empty">No records this day</p>' : ''}
                 ${day.grouped.length > 0 ? `
                   <p class="detail-section-label">Services & Products</p>
                   ${day.grouped.map(g => `
@@ -787,8 +919,7 @@
                       <span class="grouped-name">${g.description}</span>
                       <span class="grouped-meta">${g.type} · qty ${g.totalQty}</span>
                       <span class="grouped-income">+${g.totalIncome.toFixed(2)} ETB</span>
-                    </div>
-                  `).join('')}
+                    </div>`).join('')}
                 ` : ''}
                 ${day.expenses.length > 0 ? `
                   <p class="detail-section-label" style="margin-top:12px">Expenses</p>
@@ -796,20 +927,21 @@
                     <div class="expense-item">
                       <span class="expense-name">
                         ${exp.category}
-                        ${exp.description
-                          ? `<span style="color:#64748b"> — ${exp.description}</span>`
-                          : ''}
+                        ${exp.description ? `<span style="color:#64748b"> — ${exp.description}</span>` : ''}
                       </span>
-                      <span class="expense-amount">-${exp.amount.toFixed(2)} ETB</span>
-                    </div>
-                  `).join('')}
+                      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+                        <span class="expense-amount">-${exp.amount.toFixed(2)} ETB</span>
+                        <div class="record-actions">
+                          <button class="btn-edit" onclick="openEditExp(${exp.id},'${exp.category.replace(/'/g,"\\'")}','${(exp.description||'').replace(/'/g,"\\'")}',${exp.amount},'${exp.date}')">✏️ Edit</button>
+                          <button class="btn-delete" onclick="deleteRecord('expense',${exp.id})">🗑️ Delete</button>
+                        </div>
+                      </div>
+                    </div>`).join('')}
                 ` : ''}
               </div>
-            </div>
-          `;
+            </div>`;
         }).join('');
 
-        // Draw bar chart
         drawWeekBar(days);
 
       } catch (err) {
@@ -831,97 +963,58 @@
       const ctx = canvas.getContext('2d');
       const W = canvas.width, H = canvas.height;
       ctx.clearRect(0, 0, W, H);
-
       const isDark = !document.body.classList.contains('light-mode');
       const textColor = isDark ? '#94a3b8' : '#475569';
       const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)';
-
       const padL = 65, padR = 20, padT = 20, padB = 55;
       const chartW = W - padL - padR;
       const chartH = H - padT - padB;
+      const maxVal = Math.max(...days.map(d => Math.max(d.totalIncome, d.totalExpenses)), 1);
 
-      const maxVal = Math.max(
-        ...days.map(d => Math.max(d.totalIncome, d.totalExpenses)), 1
-      );
-
-      // Grid lines + Y labels
-      const gridLines = 5;
-      for (let i = 0; i <= gridLines; i++) {
-        const y = padT + chartH - (i / gridLines) * chartH;
-        ctx.beginPath();
-        ctx.strokeStyle = gridColor;
-        ctx.lineWidth = 1;
-        ctx.moveTo(padL, y);
-        ctx.lineTo(padL + chartW, y);
-        ctx.stroke();
-        ctx.fillStyle = textColor;
-        ctx.font = '11px Inter, sans-serif';
+      for (let i = 0; i <= 5; i++) {
+        const y = padT + chartH - (i / 5) * chartH;
+        ctx.beginPath(); ctx.strokeStyle = gridColor; ctx.lineWidth = 1;
+        ctx.moveTo(padL, y); ctx.lineTo(padL + chartW, y); ctx.stroke();
+        ctx.fillStyle = textColor; ctx.font = '11px Inter, sans-serif';
         ctx.textAlign = 'right';
-        ctx.fillText(Math.round((i / gridLines) * maxVal), padL - 8, y + 4);
+        ctx.fillText(Math.round((i / 5) * maxVal), padL - 8, y + 4);
       }
 
-      // Bars
       const groupW = chartW / days.length;
       const barW = groupW * 0.28;
       const gap = groupW * 0.05;
 
       days.forEach((day, i) => {
         const x = padL + i * groupW + groupW * 0.12;
-
-        // Income bar
         const incomeH = (day.totalIncome / maxVal) * chartH;
         ctx.fillStyle = '#3b82f6';
-        ctx.beginPath();
-        ctx.roundRect(x, padT + chartH - incomeH, barW, incomeH, [4, 4, 0, 0]);
-        ctx.fill();
-
-        // Expense bar
+        ctx.beginPath(); ctx.roundRect(x, padT + chartH - incomeH, barW, incomeH, [4,4,0,0]); ctx.fill();
         const expH = (day.totalExpenses / maxVal) * chartH;
         ctx.fillStyle = '#ef4444';
-        ctx.beginPath();
-        ctx.roundRect(x + barW + gap, padT + chartH - expH, barW, expH, [4, 4, 0, 0]);
-        ctx.fill();
-
-        // Day name on X axis
+        ctx.beginPath(); ctx.roundRect(x + barW + gap, padT + chartH - expH, barW, expH, [4,4,0,0]); ctx.fill();
         const dateObj = new Date(day.date + 'T00:00:00');
-        const dayShort = DAYS[dateObj.getDay()].slice(0, 3);
-        ctx.fillStyle = textColor;
-        ctx.font = '11px Inter, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(dayShort, x + barW + gap / 2, padT + chartH + 16);
-
-        // Date on X axis
+        ctx.fillStyle = textColor; ctx.font = '11px Inter, sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText(DAYS[dateObj.getDay()].slice(0, 3), x + barW + gap / 2, padT + chartH + 16);
         const parts = day.date.split('-');
         ctx.font = '10px Inter, sans-serif';
         ctx.fillStyle = isDark ? '#475569' : '#94a3b8';
         ctx.fillText(`${parts[1]}/${parts[2]}`, x + barW + gap / 2, padT + chartH + 30);
       });
 
-      // Legend
-      ctx.fillStyle = '#3b82f6';
-      ctx.fillRect(padL, H - 16, 10, 10);
-      ctx.fillStyle = textColor;
-      ctx.font = '11px Inter, sans-serif';
-      ctx.textAlign = 'left';
+      ctx.fillStyle = '#3b82f6'; ctx.fillRect(padL, H - 16, 10, 10);
+      ctx.fillStyle = textColor; ctx.font = '11px Inter, sans-serif'; ctx.textAlign = 'left';
       ctx.fillText('Income', padL + 14, H - 7);
-
-      ctx.fillStyle = '#ef4444';
-      ctx.fillRect(padL + 72, H - 16, 10, 10);
-      ctx.fillStyle = textColor;
-      ctx.fillText('Expenses', padL + 86, H - 7);
+      ctx.fillStyle = '#ef4444'; ctx.fillRect(padL + 72, H - 16, 10, 10);
+      ctx.fillStyle = textColor; ctx.fillText('Expenses', padL + 86, H - 7);
     }
 
     // ── Theme toggle ──
     document.getElementById('themeToggle').addEventListener('click', function () {
       document.body.classList.toggle('light-mode');
       this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
-      const active = document.querySelector('.tab-btn.active').textContent;
-      if (active.includes('Today')) loadReport('today', null);
-      else if (active.includes('Week')) loadWeek(null);
-      else loadReport('month', null);
+      reloadCurrent();
     });
 
-    // Load on open if logged in
     if (sessionStorage.getItem('auth') === 'true') {
       loadReport('today', null);
     }
