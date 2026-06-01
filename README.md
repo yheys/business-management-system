@@ -17,6 +17,7 @@ A fullstack web app built for a real printing and stationery shop to track daily
 -  **record** — divide the weekly report
 - **authentication** — login with the password
 - **Edit** — edit the report after it is recoreded
+- **Delete** — delete the report after it is recoreded
 
 ---
 
