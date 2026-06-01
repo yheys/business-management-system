@@ -15,7 +15,8 @@ A fullstack web app built for a real printing and stationery shop to track daily
 -  **Dark and light mode** toggle
 -  **SQLite database** — no cloud, no subscription, works offline
 -  **record** — divide the weekly report
-- **authentication** — login with the password 
+- **authentication** — login with the password
+- **Edit** — edit the report after it is recoreded
 
 ---
 
@@ -25,6 +26,6 @@ A fullstack web app built for a real printing and stationery shop to track daily
 |---|---|
 | Frontend | HTML, CSS, JavaScript |
 | Backend | Node.js + Express |
-| Database | SQLite (better-sqlite3) |
+| Database | SQLite  |
 
 ---
