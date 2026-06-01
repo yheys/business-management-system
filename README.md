@@ -9,7 +9,7 @@ A fullstack web app built for a real printing and stationery shop to track daily
 -  **Record transactions** — services (print, copy, scan, type, laminate, color print) and products (A4 paper, pen, plaster, envelope)
 -  **Add custom services and products** on the fly without touching code
 -  **Record expenses** — fixed categories (rent, electricity, transport, ink cartridge, paper restock) and flexible custom expenses
--  **Daily, weekly, and monthly reports** — income, expenses, and net profit
+-  **Daily, weekly, monthly and annualy reports** — income, expenses, and net profit
 -  **Top services ranking** with an interactive donut chart
 -  **Ethiopian calendar** date display
 -  **Dark and light mode** toggle
